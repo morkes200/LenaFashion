@@ -2259,17 +2259,19 @@ function throttle(fn, ms = 100) {
   };
 }
 
-// ── Persistence ───────────────────────────────────────────────────────────────
+// ── Supabase Config ──────────────────────────────────────────────────────────
+const SUPABASE_URL = 'https://vercuiuqtnpfptcrnnek.supabase.co';
+const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZlcmN1aXVxdG5wZnB0Y3JubmVrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQzMDE4MzAsImV4cCI6MjA5OTg3NzgzMH0.6DdBNiyffN_dR1O14-O1HypoOhyWU2y0e6tnGnbgxJE';
+const SB_HEADERS = { apikey: SUPABASE_ANON, Authorization: `Bearer ${SUPABASE_ANON}`, 'Content-Type': 'application/json' };
+
 async function save() {
   const data = JSON.stringify(DB);
-  try { localStorage.setItem('ordersDB', data); } catch(e){} // local fallback
+  try { localStorage.setItem('ordersDB', data); } catch(e){}
   try {
-    await fetch('/api/data', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: data
+    await fetch(`${SUPABASE_URL}/rest/v1/app_data?id=eq.1`, {
+      method: 'PATCH', headers: SB_HEADERS, body: JSON.stringify({ data: DB })
     });
-  } catch(e){} // server unreachable — data safe in localStorage
+  } catch(e){}
 }
 const debouncedSave = debounce(save, 500);
 
@@ -2280,22 +2282,19 @@ window._debouncedRenderLists = debounce(renderListsTable, 250);
 window._debouncedQuickDeleteSearch = debounce(quickDeleteSearch, 300);
 async function load() {
   try {
-    const res = await fetch('/api/data');
-    if (res.status === 204) {
-      // no server data yet — fallback to localStorage
-      const d = localStorage.getItem('ordersDB');
-      if (d) { DB = JSON.parse(d); }
-    } else if (res.ok) {
-      DB = await res.json();
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/app_data?id=eq.1`, { headers: SB_HEADERS });
+    if (res.ok) {
+      const rows = await res.json();
+      if (rows.length > 0 && rows[0].data) {
+        DB = rows[0].data;
+      }
     }
   } catch(e) {
-    // fallback to localStorage if server unreachable
     try {
       const d = localStorage.getItem('ordersDB');
       if (d) { DB = JSON.parse(d); }
     } catch(e2){}
   }
-  // ensure default admin always exists
   if (!DB.users) DB.users = [];
   if (!DB.users.find(u => u.role === 'admin')) {
     DB.users.unshift({ username: 'admin', password: 'admin123', role: 'admin' });
