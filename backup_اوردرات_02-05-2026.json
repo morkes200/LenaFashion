@@ -1,0 +1,2725 @@
+{
+  "_version": 1,
+  "_exportedAt": "2026-05-02T10:42:25.601Z",
+  "_exportedBy": "admin",
+  "orders": [
+    {
+      "id": 1001,
+      "date": "2026-03-06",
+      "day": "الجمعة",
+      "clientName": "سامية عبد الرسول",
+      "phones": [
+        "01004435420",
+        "01284179582"
+      ],
+      "phone": "01004435420",
+      "items": [
+        {
+          "model": "N2G",
+          "color": "نبيتى",
+          "size": "3XL"
+        },
+        {
+          "model": "NG",
+          "color": "نبيتى",
+          "size": "3XL"
+        }
+      ],
+      "model": "N2G",
+      "color": "نبيتى",
+      "size": "3XL",
+      "sales": "A",
+      "notes": "",
+      "createdAt": "2026-03-07T17:34:05.381Z",
+      "status": "delivered"
+    },
+    {
+      "id": 1002,
+      "date": "2026-03-07",
+      "day": "السبت",
+      "clientName": "حنان محمد",
+      "phones": [
+        "01155594146"
+      ],
+      "phone": "01155594146",
+      "items": [
+        {
+          "model": "bsb",
+          "color": "ازرق",
+          "size": "XL"
+        }
+      ],
+      "model": "bsb",
+      "color": "ازرق",
+      "size": "XL",
+      "sales": "B",
+      "notes": "",
+      "createdAt": "2026-03-07T20:29:33.420Z",
+      "status": "delivered"
+    },
+    {
+      "id": 1003,
+      "date": "2026-03-08",
+      "day": "الأحد",
+      "clientName": "روبى ذكى",
+      "phones": [
+        "01222782224"
+      ],
+      "phone": "01222782224",
+      "items": [
+        {
+          "model": "VN",
+          "color": "اسود",
+          "size": "XL"
+        }
+      ],
+      "model": "VN",
+      "color": "اسود",
+      "size": "XL",
+      "sales": "A",
+      "notes": "",
+      "createdAt": "2026-03-09T10:27:17.213Z",
+      "status": "delivered"
+    },
+    {
+      "id": 1004,
+      "date": "2026-03-10",
+      "day": "الثلاثاء",
+      "clientName": "بسمة غباشى",
+      "phones": [
+        "01553530417"
+      ],
+      "phone": "01553530417",
+      "items": [
+        {
+          "model": "bab",
+          "color": "هافان",
+          "size": "XL"
+        }
+      ],
+      "model": "bab",
+      "color": "هافان",
+      "size": "XL",
+      "sales": "B",
+      "notes": "",
+      "createdAt": "2026-03-10T18:48:56.042Z",
+      "status": "delivered"
+    },
+    {
+      "id": 1005,
+      "date": "2026-03-10",
+      "day": "الثلاثاء",
+      "clientName": "نادين",
+      "phones": [
+        "01014908909"
+      ],
+      "phone": "01014908909",
+      "items": [
+        {
+          "model": "Bar",
+          "color": "ابيض",
+          "size": "2XL"
+        }
+      ],
+      "model": "Bar",
+      "color": "ابيض",
+      "size": "2XL",
+      "sales": "B",
+      "notes": "",
+      "createdAt": "2026-03-11T10:46:33.458Z",
+      "status": "delivered"
+    },
+    {
+      "id": 1006,
+      "date": "2026-03-16",
+      "day": "الإثنين",
+      "clientName": "سمر",
+      "phones": [
+        "01225450553"
+      ],
+      "phone": "01225450553",
+      "items": [
+        {
+          "model": "VN",
+          "color": "بيبي بلو",
+          "size": "2XL"
+        },
+        {
+          "model": "VN",
+          "color": "اسود",
+          "size": "2XL"
+        },
+        {
+          "model": "VN",
+          "color": "بيج",
+          "size": "2XL"
+        }
+      ],
+      "model": "VN",
+      "color": "بيبي بلو",
+      "size": "2XL",
+      "sales": "B",
+      "notes": "",
+      "createdAt": "2026-03-17T10:51:49.785Z",
+      "status": "delivered"
+    },
+    {
+      "id": 1007,
+      "date": "2026-03-17",
+      "day": "الثلاثاء",
+      "clientName": "عبد الرحمن",
+      "phones": [
+        "01221730290"
+      ],
+      "phone": "01221730290",
+      "items": [
+        {
+          "model": "بوكليت دبى",
+          "color": "اسود",
+          "size": "3XL"
+        },
+        {
+          "model": "بوكليت دبى",
+          "color": "بيبي بلو",
+          "size": "3XL"
+        }
+      ],
+      "model": "بوكليت دبى",
+      "color": "اسود",
+      "size": "3XL",
+      "sales": "A",
+      "notes": "",
+      "createdAt": "2026-03-17T12:24:26.204Z",
+      "status": "delivered"
+    },
+    {
+      "id": 1008,
+      "date": "2026-03-17",
+      "day": "الثلاثاء",
+      "clientName": "روز احمد",
+      "phones": [
+        "01025582302"
+      ],
+      "phone": "01025582302",
+      "items": [
+        {
+          "model": "Bwb",
+          "color": "احمر",
+          "size": "S"
+        }
+      ],
+      "model": "Bwb",
+      "color": "احمر",
+      "size": "S",
+      "sales": "mark",
+      "notes": "",
+      "createdAt": "2026-03-17T17:42:32.333Z",
+      "status": "delivered"
+    },
+    {
+      "id": 1009,
+      "date": "2026-03-17",
+      "day": "الثلاثاء",
+      "clientName": "ايه جابر",
+      "phones": [
+        "01144838350",
+        "01120690634"
+      ],
+      "phone": "01144838350",
+      "items": [
+        {
+          "model": "TCW",
+          "color": "بروجندى",
+          "size": "M"
+        }
+      ],
+      "model": "TCW",
+      "color": "بروجندى",
+      "size": "M",
+      "sales": "A",
+      "notes": "",
+      "createdAt": "2026-03-17T18:03:17.022Z",
+      "status": "delivered"
+    },
+    {
+      "id": 1010,
+      "date": "2026-03-17",
+      "day": "الثلاثاء",
+      "clientName": "ميسا محمد",
+      "phones": [
+        "01118911312"
+      ],
+      "phone": "01118911312",
+      "items": [
+        {
+          "model": "C2B",
+          "color": "جراى",
+          "size": "S"
+        }
+      ],
+      "model": "C2B",
+      "color": "جراى",
+      "size": "S",
+      "sales": "A",
+      "notes": "",
+      "createdAt": "2026-03-17T20:06:02.786Z",
+      "status": "delivered"
+    },
+    {
+      "id": 1011,
+      "date": "2026-03-17",
+      "day": "الثلاثاء",
+      "clientName": "ايمان سمير",
+      "phones": [
+        "01552326158"
+      ],
+      "phone": "01552326158",
+      "items": [
+        {
+          "model": "كوت C مكتكت",
+          "color": "زيتي",
+          "size": "L"
+        }
+      ],
+      "model": "كوت C مكتكت",
+      "color": "زيتي",
+      "size": "L",
+      "sales": "B",
+      "notes": "",
+      "createdAt": "2026-03-17T20:07:09.402Z",
+      "status": "delivered"
+    },
+    {
+      "id": 1012,
+      "date": "2026-03-17",
+      "day": "الثلاثاء",
+      "clientName": "نسمة احمد",
+      "phones": [
+        "01142208058"
+      ],
+      "phone": "01142208058",
+      "items": [
+        {
+          "model": "bab",
+          "color": "ابيض",
+          "size": "S"
+        }
+      ],
+      "model": "bab",
+      "color": "ابيض",
+      "size": "S",
+      "sales": "B",
+      "notes": "استلام من الفرع",
+      "createdAt": "2026-03-18T10:44:11.832Z",
+      "status": "delivered"
+    },
+    {
+      "id": 1013,
+      "date": "2026-03-17",
+      "day": "الثلاثاء",
+      "clientName": "رحيل عبادى",
+      "phones": [
+        "01276223042"
+      ],
+      "phone": "01276223042",
+      "items": [
+        {
+          "model": "VN",
+          "color": "اسود",
+          "size": "3XL"
+        },
+        {
+          "model": "VN",
+          "color": "اسود",
+          "size": "3XL"
+        }
+      ],
+      "model": "VN",
+      "color": "اسود",
+      "size": "3XL",
+      "sales": "B",
+      "notes": "",
+      "createdAt": "2026-03-18T11:45:01.842Z",
+      "status": "delivered"
+    },
+    {
+      "id": 1014,
+      "date": "2026-03-17",
+      "day": "الثلاثاء",
+      "clientName": "عايدة السيد محمد",
+      "phones": [
+        "01022010882"
+      ],
+      "phone": "01022010882",
+      "items": [
+        {
+          "model": "VN",
+          "color": "اسود",
+          "size": "2XL"
+        }
+      ],
+      "model": "VN",
+      "color": "اسود",
+      "size": "2XL",
+      "sales": "B",
+      "notes": "",
+      "createdAt": "2026-03-18T11:46:09.442Z",
+      "status": "delivered"
+    },
+    {
+      "id": 1015,
+      "date": "2026-03-17",
+      "day": "الثلاثاء",
+      "clientName": "مها علاء",
+      "phones": [
+        "01015845747"
+      ],
+      "phone": "01015845747",
+      "items": [
+        {
+          "model": "بلوزة كريب كت",
+          "color": "بيج",
+          "size": "48"
+        }
+      ],
+      "model": "بلوزة كريب كت",
+      "color": "بيج",
+      "size": "48",
+      "sales": "B",
+      "notes": "",
+      "createdAt": "2026-03-18T11:48:23.315Z",
+      "status": "delivered"
+    },
+    {
+      "id": 1016,
+      "date": "2026-03-17",
+      "day": "الثلاثاء",
+      "clientName": "سماء محرج",
+      "phones": [
+        "01112014446"
+      ],
+      "phone": "01112014446",
+      "items": [
+        {
+          "model": "VN",
+          "color": "بيج",
+          "size": "M"
+        }
+      ],
+      "model": "VN",
+      "color": "بيج",
+      "size": "M",
+      "sales": "B",
+      "notes": "",
+      "createdAt": "2026-03-18T11:49:18.291Z",
+      "status": "delivered"
+    },
+    {
+      "id": 1017,
+      "date": "2026-03-18",
+      "day": "الأربعاء",
+      "clientName": "هبه اسماعيل",
+      "phones": [
+        "01030993941"
+      ],
+      "phone": "01030993941",
+      "items": [
+        {
+          "model": "جاكت فرو",
+          "color": "كشمير",
+          "size": "M"
+        }
+      ],
+      "model": "جاكت فرو",
+      "color": "كشمير",
+      "size": "M",
+      "sales": "A",
+      "notes": "",
+      "createdAt": "2026-03-18T18:04:19.414Z",
+      "status": "delivered"
+    },
+    {
+      "id": 1018,
+      "date": "2026-03-18",
+      "day": "الأربعاء",
+      "clientName": "هبه احمد",
+      "phones": [
+        "01068886758"
+      ],
+      "phone": "01068886758",
+      "items": [
+        {
+          "model": "بوكليت دبى",
+          "color": "بينك",
+          "size": "2XL"
+        }
+      ],
+      "model": "بوكليت دبى",
+      "color": "بينك",
+      "size": "2XL",
+      "sales": "B",
+      "notes": "",
+      "createdAt": "2026-03-19T11:03:32.164Z",
+      "status": "delivered"
+    },
+    {
+      "id": 1019,
+      "date": "2026-03-18",
+      "day": "الأربعاء",
+      "clientName": "بسمة محمد مجدى",
+      "phones": [
+        "01065352190"
+      ],
+      "phone": "01065352190",
+      "items": [
+        {
+          "model": "بوكليت دبى",
+          "color": "بيبي بلو",
+          "size": "2XL"
+        }
+      ],
+      "model": "بوكليت دبى",
+      "color": "بيبي بلو",
+      "size": "2XL",
+      "sales": "B",
+      "notes": "",
+      "createdAt": "2026-03-19T11:04:38.827Z",
+      "status": "delivered"
+    },
+    {
+      "id": 1020,
+      "date": "2026-03-18",
+      "day": "الأربعاء",
+      "clientName": "سالى جابر",
+      "phones": [
+        "01142366099"
+      ],
+      "phone": "01142366099",
+      "items": [
+        {
+          "model": "VN",
+          "color": "بيج",
+          "size": "L"
+        },
+        {
+          "model": "VN",
+          "color": "بيبي بلو",
+          "size": "L"
+        }
+      ],
+      "model": "VN",
+      "color": "بيج",
+      "size": "L",
+      "sales": "B",
+      "notes": "",
+      "createdAt": "2026-03-19T11:06:02.764Z",
+      "status": "delivered"
+    },
+    {
+      "id": 1022,
+      "date": "2026-03-25",
+      "day": "الأربعاء",
+      "clientName": "ايمان علاء",
+      "phones": [
+        "01092544588"
+      ],
+      "phone": "01092544588",
+      "items": [
+        {
+          "model": "VN",
+          "color": "بيبي بلو",
+          "size": "XL"
+        },
+        {
+          "model": "VN",
+          "color": "بيبي بلو",
+          "size": "XL"
+        }
+      ],
+      "model": "VN",
+      "color": "بيبي بلو",
+      "size": "XL",
+      "sales": "B",
+      "notes": "",
+      "createdAt": "2026-03-27T14:00:14.564Z",
+      "status": "delivered"
+    },
+    {
+      "id": 1023,
+      "date": "2026-03-25",
+      "day": "الأربعاء",
+      "clientName": "مروة حسن",
+      "phones": [
+        "01114315986"
+      ],
+      "phone": "01114315986",
+      "items": [
+        {
+          "model": "بوكليت دبى",
+          "color": "كحلى",
+          "size": "M"
+        }
+      ],
+      "model": "بوكليت دبى",
+      "color": "كحلى",
+      "size": "M",
+      "sales": "B",
+      "notes": "",
+      "createdAt": "2026-03-27T14:02:19.523Z",
+      "status": "delivered"
+    },
+    {
+      "id": 1024,
+      "date": "2026-03-25",
+      "day": "الأربعاء",
+      "clientName": "عبير عادل",
+      "phones": [
+        "01223545480"
+      ],
+      "phone": "01223545480",
+      "items": [
+        {
+          "model": "TC خ.م",
+          "color": "بستاج",
+          "size": "2XL"
+        }
+      ],
+      "model": "TC خ.م",
+      "color": "بستاج",
+      "size": "2XL",
+      "sales": "A",
+      "notes": "",
+      "createdAt": "2026-03-27T14:04:34.316Z",
+      "status": "delivered"
+    },
+    {
+      "id": 1025,
+      "date": "2026-03-26",
+      "day": "الخميس",
+      "clientName": "عمرو جمال",
+      "phones": [
+        "01115379782"
+      ],
+      "phone": "01115379782",
+      "items": [
+        {
+          "model": "BK كبس",
+          "color": "بيج",
+          "size": "L"
+        }
+      ],
+      "model": "BK كبس",
+      "color": "بيج",
+      "size": "L",
+      "sales": "B",
+      "notes": "",
+      "createdAt": "2026-03-27T14:05:36.284Z",
+      "status": "delivered"
+    },
+    {
+      "id": 1026,
+      "date": "2026-03-26",
+      "day": "الخميس",
+      "clientName": "ايناس السيد",
+      "phones": [
+        "01004885498"
+      ],
+      "phone": "01004885498",
+      "items": [
+        {
+          "model": "جاكت فرو",
+          "color": "كشمير",
+          "size": "M"
+        }
+      ],
+      "model": "جاكت فرو",
+      "color": "كشمير",
+      "size": "M",
+      "sales": "B",
+      "notes": "",
+      "createdAt": "2026-03-27T14:06:23.811Z",
+      "status": "delivered"
+    },
+    {
+      "id": 1027,
+      "date": "2026-03-26",
+      "day": "الخميس",
+      "clientName": "سارة حسام",
+      "phones": [
+        "01200210259"
+      ],
+      "phone": "01200210259",
+      "items": [
+        {
+          "model": "N2G",
+          "color": "اسود",
+          "size": "L"
+        },
+        {
+          "model": "NG",
+          "color": "اسود",
+          "size": "L"
+        }
+      ],
+      "model": "N2G",
+      "color": "اسود",
+      "size": "L",
+      "sales": "B",
+      "notes": "",
+      "createdAt": "2026-03-27T14:07:39.916Z",
+      "status": "delivered"
+    },
+    {
+      "id": 1028,
+      "date": "2026-03-26",
+      "day": "الخميس",
+      "clientName": "نجلاء درويش",
+      "phones": [
+        "01003811516"
+      ],
+      "phone": "01003811516",
+      "items": [
+        {
+          "model": "بلوزة كريب كت",
+          "color": "بيج",
+          "size": "2XL"
+        }
+      ],
+      "model": "بلوزة كريب كت",
+      "color": "بيج",
+      "size": "2XL",
+      "sales": "B",
+      "notes": "",
+      "createdAt": "2026-03-27T14:08:38.164Z",
+      "status": "delivered"
+    },
+    {
+      "id": 1029,
+      "date": "2026-03-26",
+      "day": "الخميس",
+      "clientName": "ولاء",
+      "phones": [
+        "01000053008"
+      ],
+      "phone": "01000053008",
+      "items": [
+        {
+          "model": "bab",
+          "color": "فوشيا",
+          "size": "3XL"
+        }
+      ],
+      "model": "bab",
+      "color": "فوشيا",
+      "size": "3XL",
+      "sales": "B",
+      "notes": "",
+      "createdAt": "2026-03-27T14:09:36.301Z",
+      "status": "delivered"
+    },
+    {
+      "id": 1030,
+      "date": "2026-03-26",
+      "day": "الخميس",
+      "clientName": "جليلة عثمان",
+      "phones": [
+        "01022399001"
+      ],
+      "phone": "01022399001",
+      "items": [
+        {
+          "model": "TC جبردين",
+          "color": "زيتي",
+          "size": "L"
+        }
+      ],
+      "model": "TC جبردين",
+      "color": "زيتي",
+      "size": "L",
+      "sales": "B",
+      "notes": "",
+      "createdAt": "2026-03-27T14:10:45.356Z",
+      "status": "delivered"
+    },
+    {
+      "id": 1031,
+      "date": "2026-03-26",
+      "day": "الخميس",
+      "clientName": "ميرا",
+      "phones": [
+        "01201458618"
+      ],
+      "phone": "01201458618",
+      "items": [
+        {
+          "model": "VN",
+          "color": "بيج",
+          "size": "2XL"
+        }
+      ],
+      "model": "VN",
+      "color": "بيج",
+      "size": "2XL",
+      "sales": "B",
+      "notes": "",
+      "createdAt": "2026-03-27T17:51:48.571Z",
+      "status": "delivered"
+    },
+    {
+      "id": 1032,
+      "date": "2026-03-28",
+      "day": "السبت",
+      "clientName": "ريهان الباز",
+      "phones": [
+        "01090328158"
+      ],
+      "phone": "01090328158",
+      "items": [
+        {
+          "model": "بلوزة كريب كت",
+          "color": "ابيض",
+          "size": "XL"
+        }
+      ],
+      "model": "بلوزة كريب كت",
+      "color": "ابيض",
+      "size": "XL",
+      "sales": "B",
+      "notes": "",
+      "createdAt": "2026-03-28T13:18:09.616Z",
+      "status": "delivered"
+    },
+    {
+      "id": 1033,
+      "date": "2026-03-28",
+      "day": "السبت",
+      "clientName": "هالة فواد",
+      "phones": [
+        "01211131010"
+      ],
+      "phone": "01211131010",
+      "items": [
+        {
+          "model": "Cg",
+          "color": "اسود",
+          "size": "3XL"
+        }
+      ],
+      "model": "Cg",
+      "color": "اسود",
+      "size": "3XL",
+      "sales": "B",
+      "notes": "",
+      "createdAt": "2026-03-28T13:18:54.832Z",
+      "status": "delivered"
+    },
+    {
+      "id": 1034,
+      "date": "2026-03-28",
+      "day": "السبت",
+      "clientName": "ندى جبران",
+      "phones": [
+        "01018187884"
+      ],
+      "phone": "01018187884",
+      "items": [
+        {
+          "model": "Cg",
+          "color": "اسود",
+          "size": "L"
+        }
+      ],
+      "model": "Cg",
+      "color": "اسود",
+      "size": "L",
+      "sales": "B",
+      "notes": "",
+      "createdAt": "2026-03-28T18:34:13.691Z",
+      "status": "delivered"
+    },
+    {
+      "id": 1035,
+      "date": "2026-03-30",
+      "day": "الإثنين",
+      "clientName": "شرين مختار",
+      "phones": [
+        "01008711423"
+      ],
+      "phone": "01008711423",
+      "items": [
+        {
+          "model": "bab",
+          "color": "اسود",
+          "size": "S"
+        }
+      ],
+      "model": "bab",
+      "color": "اسود",
+      "size": "S",
+      "sales": "B",
+      "notes": "",
+      "createdAt": "2026-03-30T16:33:36.292Z",
+      "status": "delivered"
+    },
+    {
+      "id": 1036,
+      "date": "2026-03-30",
+      "day": "الإثنين",
+      "clientName": "عمرو جمال",
+      "phones": [
+        "01115379782"
+      ],
+      "phone": "01115379782",
+      "items": [
+        {
+          "model": "sbk",
+          "color": "بيج",
+          "size": "L"
+        }
+      ],
+      "model": "sbk",
+      "color": "بيج",
+      "size": "L",
+      "sales": "B",
+      "notes": "",
+      "createdAt": "2026-03-30T16:35:20.179Z",
+      "status": "delivered"
+    },
+    {
+      "id": 1037,
+      "date": "2026-03-31",
+      "day": "الثلاثاء",
+      "clientName": "منال ممدوح",
+      "phones": [
+        "01159399914"
+      ],
+      "phone": "01159399914",
+      "items": [
+        {
+          "model": "بوكليت دبى",
+          "color": "اسود",
+          "size": "2XL"
+        }
+      ],
+      "model": "بوكليت دبى",
+      "color": "اسود",
+      "size": "2XL",
+      "sales": "M",
+      "notes": "",
+      "createdAt": "2026-03-31T11:26:22.957Z",
+      "status": "delivered"
+    },
+    {
+      "id": 1038,
+      "date": "2026-03-31",
+      "day": "الثلاثاء",
+      "clientName": "مدام سوزى",
+      "phones": [
+        "01030088329"
+      ],
+      "phone": "01030088329",
+      "items": [
+        {
+          "model": "بوكليت دبى",
+          "color": "اسود",
+          "size": "2XL"
+        }
+      ],
+      "model": "بوكليت دبى",
+      "color": "اسود",
+      "size": "2XL",
+      "sales": "A",
+      "notes": "",
+      "createdAt": "2026-03-31T16:26:53.200Z",
+      "status": "delivered"
+    },
+    {
+      "id": 1039,
+      "date": "2026-03-31",
+      "day": "الثلاثاء",
+      "clientName": "ايه رمسيس محمود",
+      "phones": [
+        "01069862815"
+      ],
+      "phone": "01069862815",
+      "items": [
+        {
+          "model": "بوكليت دبى",
+          "color": "اسود",
+          "size": "M"
+        }
+      ],
+      "model": "بوكليت دبى",
+      "color": "اسود",
+      "size": "M",
+      "sales": "M",
+      "notes": "",
+      "createdAt": "2026-03-31T17:39:56.865Z",
+      "status": "delivered"
+    },
+    {
+      "id": 1040,
+      "date": "2026-03-31",
+      "day": "الثلاثاء",
+      "clientName": "نهى شعراوى",
+      "phones": [
+        "010554561068"
+      ],
+      "phone": "010554561068",
+      "items": [
+        {
+          "model": "بوكليت دبى",
+          "color": "كحلى",
+          "size": "3XL"
+        }
+      ],
+      "model": "بوكليت دبى",
+      "color": "كحلى",
+      "size": "3XL",
+      "sales": "A",
+      "notes": "",
+      "createdAt": "2026-04-01T11:29:22.620Z",
+      "status": "delivered"
+    },
+    {
+      "id": 1041,
+      "date": "2026-03-31",
+      "day": "الثلاثاء",
+      "clientName": "نهى موافى",
+      "phones": [
+        "01028097285"
+      ],
+      "phone": "01028097285",
+      "items": [
+        {
+          "model": "بوكليت دبى",
+          "color": "اسود",
+          "size": "XL"
+        }
+      ],
+      "model": "بوكليت دبى",
+      "color": "اسود",
+      "size": "XL",
+      "sales": "A",
+      "notes": "",
+      "createdAt": "2026-04-01T11:30:15.156Z",
+      "status": "delivered"
+    },
+    {
+      "id": 1042,
+      "date": "2026-03-31",
+      "day": "الثلاثاء",
+      "clientName": "فادية محمد",
+      "phones": [
+        "01017094977"
+      ],
+      "phone": "01017094977",
+      "items": [
+        {
+          "model": "CB",
+          "color": "بيج",
+          "size": "4XL"
+        }
+      ],
+      "model": "CB",
+      "color": "بيج",
+      "size": "4XL",
+      "sales": "B",
+      "notes": "",
+      "createdAt": "2026-04-01T11:32:51.700Z",
+      "status": "delivered"
+    },
+    {
+      "id": 1043,
+      "date": "2026-04-01",
+      "day": "الأربعاء",
+      "clientName": "د/ولاء سمير حسين",
+      "phones": [
+        "01063036081"
+      ],
+      "phone": "01063036081",
+      "items": [
+        {
+          "model": "بلوزة منقطة",
+          "color": "جراى",
+          "size": "2XL"
+        }
+      ],
+      "model": "بلوزة منقطة",
+      "color": "جراى",
+      "size": "2XL",
+      "sales": "M",
+      "notes": "",
+      "createdAt": "2026-04-01T14:59:01.779Z",
+      "status": "delivered"
+    },
+    {
+      "id": 1044,
+      "date": "2026-04-03",
+      "day": "الجمعة",
+      "clientName": "negma hebashy",
+      "phones": [
+        "0128388068"
+      ],
+      "phone": "0128388068",
+      "items": [
+        {
+          "model": "Tcs1",
+          "color": "كحلى",
+          "size": "M"
+        }
+      ],
+      "model": "Tcs1",
+      "color": "كحلى",
+      "size": "M",
+      "sales": "B",
+      "notes": "",
+      "createdAt": "2026-04-03T10:45:32.545Z",
+      "status": "delivered"
+    },
+    {
+      "id": 1045,
+      "date": "2026-04-03",
+      "day": "الجمعة",
+      "clientName": "محمد ابو بكر",
+      "phones": [
+        "01017900932",
+        "01003582483"
+      ],
+      "phone": "01017900932",
+      "items": [
+        {
+          "model": "Cg",
+          "color": "جراى",
+          "size": "3XL"
+        },
+        {
+          "model": "TCW",
+          "color": "كحلى",
+          "size": "2XL"
+        }
+      ],
+      "model": "Cg",
+      "color": "جراى",
+      "size": "3XL",
+      "sales": "AM",
+      "notes": "",
+      "createdAt": "2026-04-03T10:47:43.929Z",
+      "status": "delivered"
+    },
+    {
+      "id": 1046,
+      "date": "2026-04-04",
+      "day": "السبت",
+      "clientName": "سارة احمد",
+      "phones": [
+        "01208752359"
+      ],
+      "phone": "01208752359",
+      "items": [
+        {
+          "model": "TC جبردين",
+          "color": "زيتي",
+          "size": "3XL"
+        }
+      ],
+      "model": "TC جبردين",
+      "color": "زيتي",
+      "size": "3XL",
+      "sales": "ٍSh",
+      "notes": "",
+      "createdAt": "2026-04-04T07:56:20.769Z",
+      "status": "delivered"
+    },
+    {
+      "id": 1047,
+      "date": "2026-04-04",
+      "day": "السبت",
+      "clientName": "هند محمد",
+      "phones": [
+        "01099164691",
+        "01143175931"
+      ],
+      "phone": "01099164691",
+      "items": [
+        {
+          "model": "R1",
+          "color": "بروجندى",
+          "size": "L"
+        }
+      ],
+      "model": "R1",
+      "color": "بروجندى",
+      "size": "L",
+      "sales": "M",
+      "notes": "",
+      "createdAt": "2026-04-04T17:42:49.324Z",
+      "status": "delivered"
+    },
+    {
+      "id": 1049,
+      "date": "2026-04-07",
+      "day": "الثلاثاء",
+      "clientName": "منار جمال",
+      "phones": [
+        "01141033586"
+      ],
+      "phone": "01141033586",
+      "items": [
+        {
+          "model": "Bar",
+          "color": "اسود",
+          "size": "XL"
+        }
+      ],
+      "model": "Bar",
+      "color": "اسود",
+      "size": "XL",
+      "sales": "M",
+      "notes": "",
+      "createdAt": "2026-04-07T14:57:54.460Z",
+      "status": "delivered"
+    },
+    {
+      "id": 1050,
+      "date": "2026-04-07",
+      "day": "الثلاثاء",
+      "clientName": "ايه احمد",
+      "phones": [
+        "01063322001"
+      ],
+      "phone": "01063322001",
+      "items": [
+        {
+          "model": "بلوزة كريب كت",
+          "color": "بروجندى",
+          "size": "XL"
+        }
+      ],
+      "model": "بلوزة كريب كت",
+      "color": "بروجندى",
+      "size": "XL",
+      "sales": "ٍSh",
+      "notes": "",
+      "createdAt": "2026-04-07T14:58:48.723Z",
+      "status": "delivered"
+    },
+    {
+      "id": 1051,
+      "date": "2026-04-07",
+      "day": "الثلاثاء",
+      "clientName": "منى محمد",
+      "phones": [
+        "01142294899"
+      ],
+      "phone": "01142294899",
+      "items": [
+        {
+          "model": "بلوزة كريب كت",
+          "color": "بروجندى",
+          "size": "2XL"
+        }
+      ],
+      "model": "بلوزة كريب كت",
+      "color": "بروجندى",
+      "size": "2XL",
+      "sales": "B",
+      "notes": "",
+      "createdAt": "2026-04-07T18:19:36.298Z",
+      "status": "delivered"
+    },
+    {
+      "id": 1052,
+      "date": "2026-04-08",
+      "day": "الأربعاء",
+      "clientName": "ايمان احمد",
+      "phones": [
+        "01008038626"
+      ],
+      "phone": "01008038626",
+      "items": [
+        {
+          "model": "Cg",
+          "color": "اسود",
+          "size": "L"
+        }
+      ],
+      "model": "Cg",
+      "color": "اسود",
+      "size": "L",
+      "sales": "ٍSh",
+      "notes": "",
+      "createdAt": "2026-04-08T12:24:20.309Z",
+      "status": "delivered"
+    },
+    {
+      "id": 1053,
+      "date": "2026-04-08",
+      "day": "الأربعاء",
+      "clientName": "محمود طارق",
+      "phones": [
+        "01159000300"
+      ],
+      "phone": "01159000300",
+      "items": [
+        {
+          "model": "بلوزة كريب كت",
+          "color": "ابيض",
+          "size": "XL"
+        }
+      ],
+      "model": "بلوزة كريب كت",
+      "color": "ابيض",
+      "size": "XL",
+      "sales": "ٍSh",
+      "notes": "",
+      "createdAt": "2026-04-08T12:25:10.493Z",
+      "status": "delivered"
+    },
+    {
+      "id": 1054,
+      "date": "2026-04-10",
+      "day": "الجمعة",
+      "clientName": "دعاء احمد",
+      "phones": [
+        "01006299646"
+      ],
+      "phone": "01006299646",
+      "items": [
+        {
+          "model": "bab",
+          "color": "هافان",
+          "size": "2XL"
+        }
+      ],
+      "model": "bab",
+      "color": "هافان",
+      "size": "2XL",
+      "sales": "ٍSh",
+      "notes": "",
+      "createdAt": "2026-04-10T10:56:34.368Z",
+      "status": "delivered"
+    },
+    {
+      "id": 1055,
+      "date": "2026-04-11",
+      "day": "السبت",
+      "clientName": "رنا ممدوح",
+      "phones": [
+        "01121230557"
+      ],
+      "phone": "01121230557",
+      "items": [
+        {
+          "model": "PZ",
+          "color": "اسود",
+          "size": "L"
+        }
+      ],
+      "model": "PZ",
+      "color": "اسود",
+      "size": "L",
+      "sales": "ٍSh",
+      "notes": "",
+      "createdAt": "2026-04-11T14:46:56.819Z",
+      "status": "delivered"
+    },
+    {
+      "id": 1056,
+      "date": "2026-04-11",
+      "day": "السبت",
+      "clientName": "نورا محمد هيكل",
+      "phones": [
+        "01228810135"
+      ],
+      "phone": "01228810135",
+      "items": [
+        {
+          "model": "Bar",
+          "color": "اسود",
+          "size": "XL"
+        }
+      ],
+      "model": "Bar",
+      "color": "اسود",
+      "size": "XL",
+      "sales": "ٍSh",
+      "notes": "",
+      "createdAt": "2026-04-11T16:38:19.534Z",
+      "status": "delivered"
+    },
+    {
+      "id": 1057,
+      "date": "2026-04-15",
+      "day": "الأربعاء",
+      "clientName": "الاء متولى",
+      "phones": [
+        "01220170626"
+      ],
+      "phone": "01220170626",
+      "items": [
+        {
+          "model": "B2L",
+          "color": "بيج",
+          "size": "2XL"
+        }
+      ],
+      "model": "B2L",
+      "color": "بيج",
+      "size": "2XL",
+      "sales": "ٍSh",
+      "notes": "ارسال قطعة بدل القطعة اللى راحت مقاس غلط للاوردر",
+      "createdAt": "2026-04-15T12:02:36.157Z",
+      "status": "delivered"
+    },
+    {
+      "id": 1058,
+      "date": "2026-04-15",
+      "day": "الأربعاء",
+      "clientName": "م/ مارك",
+      "phones": [
+        "01283622743"
+      ],
+      "phone": "01283622743",
+      "items": [
+        {
+          "model": "شنطة كروس",
+          "color": "بنى",
+          "size": "OS"
+        }
+      ],
+      "model": "شنطة كروس",
+      "color": "بنى",
+      "size": "OS",
+      "sales": "B",
+      "notes": "",
+      "createdAt": "2026-04-15T12:06:13.861Z",
+      "status": "delivered"
+    },
+    {
+      "id": 1059,
+      "date": "2026-04-16",
+      "day": "الخميس",
+      "clientName": "مها كمال",
+      "phones": [
+        "01228560661"
+      ],
+      "phone": "01228560661",
+      "items": [
+        {
+          "model": "bab",
+          "color": "اسود",
+          "size": "XL"
+        },
+        {
+          "model": "Vwb",
+          "color": "اسود",
+          "size": "L"
+        }
+      ],
+      "model": "bab",
+      "color": "اسود",
+      "size": "XL",
+      "sales": "ٍSh",
+      "notes": "",
+      "createdAt": "2026-04-16T13:34:23.706Z",
+      "status": "delivered"
+    },
+    {
+      "id": 1060,
+      "date": "2026-04-16",
+      "day": "الخميس",
+      "clientName": "سالى محمد",
+      "phones": [
+        "01064450385"
+      ],
+      "phone": "01064450385",
+      "items": [
+        {
+          "model": "bab",
+          "color": "اسود",
+          "size": "2XL"
+        },
+        {
+          "model": "bab",
+          "color": "اسود",
+          "size": "3XL"
+        }
+      ],
+      "model": "bab",
+      "color": "اسود",
+      "size": "2XL",
+      "sales": "ٍSh",
+      "notes": "",
+      "createdAt": "2026-04-16T19:32:46.933Z",
+      "status": "prepared"
+    },
+    {
+      "id": 1062,
+      "date": "2026-04-17",
+      "day": "الجمعة",
+      "clientName": "شيماء جمال",
+      "phones": [
+        "01000627027"
+      ],
+      "phone": "01000627027",
+      "items": [
+        {
+          "model": "Bwb",
+          "color": "اسود",
+          "size": "3XL"
+        }
+      ],
+      "model": "Bwb",
+      "color": "اسود",
+      "size": "3XL",
+      "sales": "AI",
+      "notes": "",
+      "createdAt": "2026-04-17T19:52:11.385Z",
+      "status": "prepared"
+    },
+    {
+      "id": 1063,
+      "date": "2026-04-16",
+      "day": "الخميس",
+      "clientName": "حنين السيد سالم",
+      "phones": [
+        "01063285151"
+      ],
+      "phone": "01063285151",
+      "items": [
+        {
+          "model": "wrf روزالين",
+          "color": "ابيض",
+          "size": "XL"
+        },
+        {
+          "model": "pw روزالين",
+          "color": "ابيض",
+          "size": "XL"
+        }
+      ],
+      "model": "wrf روزالين",
+      "color": "ابيض",
+      "size": "XL",
+      "sales": "B",
+      "notes": "",
+      "createdAt": "2026-04-18T10:07:53.161Z",
+      "status": "prepared"
+    },
+    {
+      "id": 1064,
+      "date": "2026-04-20",
+      "day": "الإثنين",
+      "clientName": "م/ مارك",
+      "phones": [
+        "01283622743"
+      ],
+      "phone": "01283622743",
+      "items": [
+        {
+          "model": "شنطة كروس",
+          "color": "بنى",
+          "size": "OS"
+        }
+      ],
+      "model": "شنطة كروس",
+      "color": "بنى",
+      "size": "OS",
+      "sales": "B",
+      "notes": "استلام من الفرع",
+      "createdAt": "2026-04-20T11:21:40.546Z",
+      "status": "prepared"
+    },
+    {
+      "id": 1065,
+      "date": "2026-04-21",
+      "day": "الثلاثاء",
+      "clientName": "ياسمين ابراهيم",
+      "phones": [
+        "01151631957"
+      ],
+      "phone": "01151631957",
+      "items": [
+        {
+          "model": "N2G",
+          "color": "كحلى",
+          "size": "3XL"
+        },
+        {
+          "model": "NG",
+          "color": "كحلى",
+          "size": "3XL"
+        }
+      ],
+      "model": "N2G",
+      "color": "كحلى",
+      "size": "3XL",
+      "sales": "ٍSh",
+      "notes": "",
+      "createdAt": "2026-04-21T10:41:46.636Z",
+      "status": "prepared"
+    },
+    {
+      "id": 1066,
+      "date": "2026-04-21",
+      "day": "الثلاثاء",
+      "clientName": "نورهان محمود",
+      "phones": [
+        "01225231446"
+      ],
+      "phone": "01225231446",
+      "items": [
+        {
+          "model": "bab",
+          "color": "اسود",
+          "size": "3XL"
+        }
+      ],
+      "model": "bab",
+      "color": "اسود",
+      "size": "3XL",
+      "sales": "B",
+      "notes": "",
+      "createdAt": "2026-04-21T10:42:36.171Z",
+      "status": "prepared"
+    },
+    {
+      "id": 1067,
+      "date": "2026-04-22",
+      "day": "الأربعاء",
+      "clientName": "اسماء الحديدى",
+      "phones": [
+        "01097800058"
+      ],
+      "phone": "01097800058",
+      "items": [
+        {
+          "model": "Bar",
+          "color": "ابيض",
+          "size": "2XL"
+        }
+      ],
+      "model": "Bar",
+      "color": "ابيض",
+      "size": "2XL",
+      "sales": "B",
+      "notes": "",
+      "createdAt": "2026-04-22T11:32:25.948Z",
+      "status": "prepared"
+    },
+    {
+      "id": 1068,
+      "date": "2026-04-22",
+      "day": "الأربعاء",
+      "clientName": "ميادة محمد",
+      "phones": [
+        "01223358539"
+      ],
+      "phone": "01223358539",
+      "items": [
+        {
+          "model": "بليزر بودرا خط اسود",
+          "color": "ابيض",
+          "size": "S"
+        }
+      ],
+      "model": "بليزر بودرا خط اسود",
+      "color": "ابيض",
+      "size": "S",
+      "sales": "ٍSh",
+      "notes": "",
+      "createdAt": "2026-04-22T11:33:32.100Z",
+      "status": "prepared"
+    },
+    {
+      "id": 1069,
+      "date": "2026-04-29",
+      "day": "الأربعاء",
+      "clientName": "منه الله",
+      "phones": [
+        "01143632007"
+      ],
+      "phone": "01143632007",
+      "items": [
+        {
+          "model": "Bar",
+          "color": "بيج",
+          "size": "3XL"
+        }
+      ],
+      "model": "Bar",
+      "color": "بيج",
+      "size": "3XL",
+      "sales": "B",
+      "notes": "",
+      "createdAt": "2026-04-29T10:09:05.336Z",
+      "status": "prepared"
+    },
+    {
+      "id": 1070,
+      "date": "2026-04-29",
+      "day": "الأربعاء",
+      "clientName": "دعاء مصطفى",
+      "phones": [
+        "01286010546"
+      ],
+      "phone": "01286010546",
+      "items": [
+        {
+          "model": "Bar",
+          "color": "هافان",
+          "size": "3XL"
+        },
+        {
+          "model": "Bar",
+          "color": "ازرق",
+          "size": "3XL"
+        }
+      ],
+      "model": "Bar",
+      "color": "هافان",
+      "size": "3XL",
+      "sales": "ٍSh",
+      "notes": "",
+      "createdAt": "2026-04-29T18:25:13.420Z",
+      "status": "prepared"
+    },
+    {
+      "id": 1071,
+      "date": "2026-04-30",
+      "day": "الخميس",
+      "clientName": "شيماء غندور",
+      "phones": [
+        "01114105149"
+      ],
+      "phone": "01114105149",
+      "items": [
+        {
+          "model": "LB",
+          "color": "بيج",
+          "size": "4XL"
+        }
+      ],
+      "model": "LB",
+      "color": "بيج",
+      "size": "4XL",
+      "sales": "ٍSh",
+      "notes": "",
+      "createdAt": "2026-04-30T12:50:53.985Z",
+      "status": "prepared"
+    },
+    {
+      "id": 1072,
+      "date": "2026-04-30",
+      "day": "الخميس",
+      "clientName": "هبه محمد قويس",
+      "phones": [
+        "01029932440"
+      ],
+      "phone": "01029932440",
+      "items": [
+        {
+          "model": "bab",
+          "color": "بروجندى",
+          "size": "3XL"
+        },
+        {
+          "model": "s wp",
+          "color": "ابيض",
+          "size": "XL"
+        }
+      ],
+      "model": "bab",
+      "color": "بروجندى",
+      "size": "3XL",
+      "sales": "ٍSh",
+      "notes": "",
+      "createdAt": "2026-04-30T12:52:25.657Z",
+      "status": "prepared"
+    },
+    {
+      "id": 1073,
+      "date": "2026-04-30",
+      "day": "الخميس",
+      "clientName": "ايفا",
+      "phones": [
+        "01022900286",
+        "01278177451"
+      ],
+      "phone": "01022900286",
+      "items": [
+        {
+          "model": "TC جبردين",
+          "color": "زيتي",
+          "size": "3XL"
+        }
+      ],
+      "model": "TC جبردين",
+      "color": "زيتي",
+      "size": "3XL",
+      "sales": "ٍSh",
+      "notes": "",
+      "createdAt": "2026-04-30T12:53:20.729Z",
+      "status": "prepared"
+    },
+    {
+      "id": 1074,
+      "date": "2026-04-30",
+      "day": "الخميس",
+      "clientName": "سارة عطية",
+      "phones": [
+        "01206734324"
+      ],
+      "phone": "01206734324",
+      "items": [
+        {
+          "model": "bab",
+          "color": "نبيتى",
+          "size": "XL"
+        }
+      ],
+      "model": "bab",
+      "color": "نبيتى",
+      "size": "XL",
+      "sales": "B",
+      "notes": "",
+      "createdAt": "2026-04-30T12:54:08.889Z",
+      "status": "prepared"
+    },
+    {
+      "id": 1075,
+      "date": "2026-05-01",
+      "day": "الجمعة",
+      "clientName": "اسماء على",
+      "phones": [
+        "01288811733"
+      ],
+      "phone": "01288811733",
+      "items": [
+        {
+          "model": "بلوزة رباط",
+          "color": "اسود",
+          "size": "L"
+        }
+      ],
+      "model": "بلوزة رباط",
+      "color": "اسود",
+      "size": "L",
+      "sales": "ٍSh",
+      "notes": "",
+      "createdAt": "2026-05-01T10:37:05.015Z"
+    },
+    {
+      "id": 1076,
+      "date": "2026-05-01",
+      "day": "الجمعة",
+      "clientName": "بسمة جمال",
+      "phones": [
+        "01003978880"
+      ],
+      "phone": "01003978880",
+      "items": [
+        {
+          "model": "bab",
+          "color": "بروجندى",
+          "size": "M"
+        }
+      ],
+      "model": "bab",
+      "color": "بروجندى",
+      "size": "M",
+      "sales": "ٍSh",
+      "notes": "",
+      "createdAt": "2026-05-01T10:37:51.319Z"
+    }
+  ],
+  "clients": [
+    {
+      "name": "سامية عبد الرسول",
+      "phones": [
+        "01004435420",
+        "01284179582"
+      ],
+      "phone": "01004435420",
+      "addedDate": "2026-03-06"
+    },
+    {
+      "name": "حنان محمد",
+      "phones": [
+        "01155594146"
+      ],
+      "phone": "01155594146",
+      "addedDate": "2026-03-07"
+    },
+    {
+      "name": "روبى ذكى",
+      "phones": [
+        "01222782224"
+      ],
+      "phone": "01222782224",
+      "addedDate": "2026-03-08"
+    },
+    {
+      "name": "بسمة غباشى",
+      "phones": [
+        "01553530417"
+      ],
+      "phone": "01553530417",
+      "addedDate": "2026-03-10"
+    },
+    {
+      "name": "نادين",
+      "phones": [
+        "01014908909"
+      ],
+      "phone": "01014908909",
+      "addedDate": "2026-03-10"
+    },
+    {
+      "name": "سمر",
+      "phones": [
+        "01225450553"
+      ],
+      "phone": "01225450553",
+      "addedDate": "2026-03-16"
+    },
+    {
+      "name": "عبد الرحمن",
+      "phones": [
+        "01221730290"
+      ],
+      "phone": "01221730290",
+      "addedDate": "2026-03-17"
+    },
+    {
+      "name": "روز احمد",
+      "phones": [
+        "01025582302"
+      ],
+      "phone": "01025582302",
+      "addedDate": "2026-03-17"
+    },
+    {
+      "name": "ايه جابر",
+      "phones": [
+        "01144838350",
+        "01120690634"
+      ],
+      "phone": "01144838350",
+      "addedDate": "2026-03-17"
+    },
+    {
+      "name": "ميسا محمد",
+      "phones": [
+        "01118911312"
+      ],
+      "phone": "01118911312",
+      "addedDate": "2026-03-17"
+    },
+    {
+      "name": "ايمان سمير",
+      "phones": [
+        "01552326158"
+      ],
+      "phone": "01552326158",
+      "addedDate": "2026-03-17"
+    },
+    {
+      "name": "نسمة احمد",
+      "phones": [
+        "01142208058"
+      ],
+      "phone": "01142208058",
+      "addedDate": "2026-03-18"
+    },
+    {
+      "name": "رحيل عبادى",
+      "phones": [
+        "01276223042"
+      ],
+      "phone": "01276223042",
+      "addedDate": "2026-03-17"
+    },
+    {
+      "name": "عايدة السيد محمد",
+      "phones": [
+        "01022010882"
+      ],
+      "phone": "01022010882",
+      "addedDate": "2026-03-17"
+    },
+    {
+      "name": "مها علاء",
+      "phones": [
+        "01015845747"
+      ],
+      "phone": "01015845747",
+      "addedDate": "2026-03-17"
+    },
+    {
+      "name": "سماء محرج",
+      "phones": [
+        "01112014446"
+      ],
+      "phone": "01112014446",
+      "addedDate": "2026-03-17"
+    },
+    {
+      "name": "هبه اسماعيل",
+      "phones": [
+        "01030993941"
+      ],
+      "phone": "01030993941",
+      "addedDate": "2026-03-18"
+    },
+    {
+      "name": "هبه احمد",
+      "phones": [
+        "01068886758"
+      ],
+      "phone": "01068886758",
+      "addedDate": "2026-03-18"
+    },
+    {
+      "name": "بسمة محمد مجدى",
+      "phones": [
+        "01065352190"
+      ],
+      "phone": "01065352190",
+      "addedDate": "2026-03-18"
+    },
+    {
+      "name": "سالى جابر",
+      "phones": [
+        "01142366099"
+      ],
+      "phone": "01142366099",
+      "addedDate": "2026-03-18"
+    },
+    {
+      "name": "ايمان علاء",
+      "phones": [
+        "01092544588"
+      ],
+      "phone": "01092544588",
+      "addedDate": "2026-03-25"
+    },
+    {
+      "name": "مروة حسن",
+      "phones": [
+        "01114315986"
+      ],
+      "phone": "01114315986",
+      "addedDate": "2026-03-25"
+    },
+    {
+      "name": "عبير عادل",
+      "phones": [
+        "01223545480"
+      ],
+      "phone": "01223545480",
+      "addedDate": "2026-03-25"
+    },
+    {
+      "name": "عمرو جمال",
+      "phones": [
+        "01115379782"
+      ],
+      "phone": "01115379782",
+      "addedDate": "2026-03-26"
+    },
+    {
+      "name": "ايناس السيد",
+      "phones": [
+        "01004885498"
+      ],
+      "phone": "01004885498",
+      "addedDate": "2026-03-26"
+    },
+    {
+      "name": "سارة حسام",
+      "phones": [
+        "01200210259"
+      ],
+      "phone": "01200210259",
+      "addedDate": "2026-03-26"
+    },
+    {
+      "name": "نجلاء درويش",
+      "phones": [
+        "01003811516"
+      ],
+      "phone": "01003811516",
+      "addedDate": "2026-03-26"
+    },
+    {
+      "name": "ولاء",
+      "phones": [
+        "01000053008"
+      ],
+      "phone": "01000053008",
+      "addedDate": "2026-03-26"
+    },
+    {
+      "name": "جليلة عثمان",
+      "phones": [
+        "01022399001"
+      ],
+      "phone": "01022399001",
+      "addedDate": "2026-03-26"
+    },
+    {
+      "name": "ميرا",
+      "phones": [
+        "01201458618"
+      ],
+      "phone": "01201458618",
+      "addedDate": "2026-03-26"
+    },
+    {
+      "name": "ريهان الباز",
+      "phones": [
+        "01090328158"
+      ],
+      "phone": "01090328158",
+      "addedDate": "2026-03-28"
+    },
+    {
+      "name": "هالة فواد",
+      "phones": [
+        "01211131010"
+      ],
+      "phone": "01211131010",
+      "addedDate": "2026-03-28"
+    },
+    {
+      "name": "ندى جبران",
+      "phones": [
+        "01018187884"
+      ],
+      "phone": "01018187884",
+      "addedDate": "2026-03-28"
+    },
+    {
+      "name": "شرين مختار",
+      "phones": [
+        "01008711423"
+      ],
+      "phone": "01008711423",
+      "addedDate": "2026-03-30"
+    },
+    {
+      "name": "منال ممدوح",
+      "phones": [
+        "01159399914"
+      ],
+      "phone": "01159399914",
+      "addedDate": "2026-03-31"
+    },
+    {
+      "name": "مدام سوزى",
+      "phones": [
+        "01030088329"
+      ],
+      "phone": "01030088329",
+      "addedDate": "2026-03-31"
+    },
+    {
+      "name": "ايه رمسيس محمود",
+      "phones": [
+        "01069862815"
+      ],
+      "phone": "01069862815",
+      "addedDate": "2026-03-31"
+    },
+    {
+      "name": "نهى شعراوى",
+      "phones": [
+        "010554561068"
+      ],
+      "phone": "010554561068",
+      "addedDate": "2026-04-01"
+    },
+    {
+      "name": "نهى موافى",
+      "phones": [
+        "01028097285"
+      ],
+      "phone": "01028097285",
+      "addedDate": "2026-04-01"
+    },
+    {
+      "name": "فادية محمد",
+      "phones": [
+        "01017094977"
+      ],
+      "phone": "01017094977",
+      "addedDate": "2026-03-31"
+    },
+    {
+      "name": "د/ولاء سمير حسين",
+      "phones": [
+        "01063036081"
+      ],
+      "phone": "01063036081",
+      "addedDate": "2026-04-01"
+    },
+    {
+      "name": "negma hebashy",
+      "phones": [
+        "0128388068"
+      ],
+      "phone": "0128388068",
+      "addedDate": "2026-04-03"
+    },
+    {
+      "name": "محمد ابو بكر",
+      "phones": [
+        "01017900932",
+        "01003582483"
+      ],
+      "phone": "01017900932",
+      "addedDate": "2026-04-03"
+    },
+    {
+      "name": "سارة احمد",
+      "phones": [
+        "01208752359"
+      ],
+      "phone": "01208752359",
+      "addedDate": "2026-04-04"
+    },
+    {
+      "name": "هند محمد",
+      "phones": [
+        "01099164691",
+        "01143175931"
+      ],
+      "phone": "01099164691",
+      "addedDate": "2026-04-04"
+    },
+    {
+      "name": "الاء متولى",
+      "phones": [
+        "01220170626"
+      ],
+      "phone": "01220170626",
+      "addedDate": "2026-04-06"
+    },
+    {
+      "name": "منار جمال",
+      "phones": [
+        "01141033586"
+      ],
+      "phone": "01141033586",
+      "addedDate": "2026-04-07"
+    },
+    {
+      "name": "ايه احمد",
+      "phones": [
+        "01063322001"
+      ],
+      "phone": "01063322001",
+      "addedDate": "2026-04-07"
+    },
+    {
+      "name": "منى محمد",
+      "phones": [
+        "01142294899"
+      ],
+      "phone": "01142294899",
+      "addedDate": "2026-04-07"
+    },
+    {
+      "name": "ايمان احمد",
+      "phones": [
+        "01008038626"
+      ],
+      "phone": "01008038626",
+      "addedDate": "2026-04-08"
+    },
+    {
+      "name": "محمود طارق",
+      "phones": [
+        "01159000300"
+      ],
+      "phone": "01159000300",
+      "addedDate": "2026-04-08"
+    },
+    {
+      "name": "دعاء احمد",
+      "phones": [
+        "01006299646"
+      ],
+      "phone": "01006299646",
+      "addedDate": "2026-04-10"
+    },
+    {
+      "name": "رنا ممدوح",
+      "phones": [
+        "01121230557"
+      ],
+      "phone": "01121230557",
+      "addedDate": "2026-04-11"
+    },
+    {
+      "name": "نورا محمد هيكل",
+      "phones": [
+        "01228810135"
+      ],
+      "phone": "01228810135",
+      "addedDate": "2026-04-11"
+    },
+    {
+      "name": "م/ مارك",
+      "phones": [
+        "01283622743"
+      ],
+      "phone": "01283622743",
+      "addedDate": "2026-04-15"
+    },
+    {
+      "name": "مها كمال",
+      "phones": [
+        "01228560661"
+      ],
+      "phone": "01228560661",
+      "addedDate": "2026-04-16"
+    },
+    {
+      "name": "سالى محمد",
+      "phones": [
+        "01064450385"
+      ],
+      "phone": "01064450385",
+      "addedDate": "2026-04-16"
+    },
+    {
+      "name": "اسماء محمد",
+      "phones": [
+        "01097649001"
+      ],
+      "phone": "01097649001",
+      "addedDate": "2026-04-17"
+    },
+    {
+      "name": "شيماء جمال",
+      "phones": [
+        "01000627027"
+      ],
+      "phone": "01000627027",
+      "addedDate": "2026-04-17"
+    },
+    {
+      "name": "حنين السيد سالم",
+      "phones": [
+        "01063285151"
+      ],
+      "phone": "01063285151",
+      "addedDate": "2026-04-16"
+    },
+    {
+      "name": "ياسمين ابراهيم",
+      "phones": [
+        "01151631957"
+      ],
+      "phone": "01151631957",
+      "addedDate": "2026-04-21"
+    },
+    {
+      "name": "نورهان محمود",
+      "phones": [
+        "01225231446"
+      ],
+      "phone": "01225231446",
+      "addedDate": "2026-04-21"
+    },
+    {
+      "name": "اسماء الحديدى",
+      "phones": [
+        "01097800058"
+      ],
+      "phone": "01097800058",
+      "addedDate": "2026-04-22"
+    },
+    {
+      "name": "ميادة محمد",
+      "phones": [
+        "01223358539"
+      ],
+      "phone": "01223358539",
+      "addedDate": "2026-04-22"
+    },
+    {
+      "name": "منه الله",
+      "phones": [
+        "01143632007"
+      ],
+      "phone": "01143632007",
+      "addedDate": "2026-04-29"
+    },
+    {
+      "name": "دعاء مصطفى",
+      "phones": [
+        "01286010546"
+      ],
+      "phone": "01286010546",
+      "addedDate": "2026-04-29"
+    },
+    {
+      "name": "شيماء غندور",
+      "phones": [
+        "01114105149"
+      ],
+      "phone": "01114105149",
+      "addedDate": "2026-04-30"
+    },
+    {
+      "name": "هبه محمد قويس",
+      "phones": [
+        "01029932440"
+      ],
+      "phone": "01029932440",
+      "addedDate": "2026-04-30"
+    },
+    {
+      "name": "ايفا",
+      "phones": [
+        "01022900286",
+        "01278177451"
+      ],
+      "phone": "01022900286",
+      "addedDate": "2026-04-30"
+    },
+    {
+      "name": "سارة عطية",
+      "phones": [
+        "01206734324"
+      ],
+      "phone": "01206734324",
+      "addedDate": "2026-04-30"
+    },
+    {
+      "name": "اسماء على",
+      "phones": [
+        "01288811733"
+      ],
+      "phone": "01288811733",
+      "addedDate": "2026-05-01"
+    },
+    {
+      "name": "بسمة جمال",
+      "phones": [
+        "01003978880"
+      ],
+      "phone": "01003978880",
+      "addedDate": "2026-05-01"
+    }
+  ],
+  "lists": {
+    "models": [
+      "WBA",
+      "Wbyl",
+      "ياسمين كاروه تويد",
+      "ياسمين كاروه صوف",
+      "N.S",
+      "WBWB",
+      "TST",
+      "بوكليت دبى",
+      "B2L",
+      "b2g",
+      "BK كبس",
+      "PT",
+      "bab كونكورد",
+      "BK كونكورد",
+      "WBZL",
+      "Wrf",
+      "Wrf زجزاج",
+      "WV",
+      "بليزر كبس وكسر",
+      "TSH",
+      "جاكت كاب",
+      "SL",
+      "Wby",
+      "جاكت فرو",
+      "DC",
+      "C3B",
+      "C",
+      "TCW",
+      "TC جبردين",
+      "CH",
+      "CB",
+      "Tcs1",
+      "CM",
+      "Cg",
+      "كوت J",
+      "C2B",
+      "TMX",
+      "COV",
+      "TC خ.م",
+      "كوت C مكتكت",
+      "CV",
+      "TMX جبردين",
+      "TCLW",
+      "R1",
+      "WBA بذر الكتان",
+      "WP بذر الكتان",
+      "BYC",
+      "PK",
+      "ON",
+      "ONP",
+      "BKL",
+      "PZT",
+      "N2G",
+      "NG",
+      "JTL",
+      "JTS",
+      "WLWP",
+      "bab",
+      "bab كتان",
+      "bsk",
+      "sbk",
+      "Sc",
+      "B2b",
+      "Bar",
+      "Sbyl",
+      "Sbylk",
+      "bsb",
+      "Bwb",
+      "Scg",
+      "BB رباط",
+      "LB",
+      "Vwb",
+      "V2b",
+      "Vb",
+      "V",
+      "Vg",
+      "V2bb",
+      "VN",
+      "بلوزة كريب كت",
+      "بلوزة منقطة",
+      "PZ",
+      "شنطة كروس",
+      "pt روزالين",
+      "جيب بليسه",
+      "wrf روزالين",
+      "pw روزالين",
+      "vwpt",
+      "بليزر بودرا خط اسود",
+      "s wp",
+      "بلوزة رباط"
+    ],
+    "colors": [
+      "اسود",
+      "ابيض",
+      "احمر",
+      "اخضر",
+      "اخضر ف",
+      "اصفر",
+      "اصفر ف",
+      "اصفر غ",
+      "نبيتى",
+      "بروجندى",
+      "جراى",
+      "جراى ف",
+      "جراى غ",
+      "بنفسجى",
+      "كيوى",
+      "لمونى",
+      "فوشيا",
+      "اورنج",
+      "اورنج غ",
+      "كحلى",
+      "بيبي بلو",
+      "هافان",
+      "ازرق",
+      "بيج",
+      "بيج ف",
+      "بيج غ",
+      "زيتي",
+      "كشمير",
+      "بينك",
+      "بستاج",
+      "بنى"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL",
+      "3XL",
+      "4XL",
+      "OS",
+      "42",
+      "44",
+      "46",
+      "48"
+    ],
+    "salesList": [
+      "A",
+      "R",
+      "M",
+      "B",
+      "mark",
+      "AM",
+      "ٍSh",
+      "AI"
+    ]
+  },
+  "nextOrderNum": 1077,
+  "users": [
+    {
+      "username": "admin",
+      "password": "admin123",
+      "role": "admin"
+    }
+  ],
+  "trash": [
+    {
+      "type": "order",
+      "deletedAt": "2026-03-27T12:35:23.969Z",
+      "deletedBy": "admin",
+      "reason": "تكرار",
+      "data": {
+        "id": 1021,
+        "date": "2026-03-19",
+        "day": "الخميس",
+        "clientName": "سالى جابر",
+        "phones": [
+          "01142366099"
+        ],
+        "phone": "01142366099",
+        "items": [
+          {
+            "model": "VN",
+            "color": "بيج",
+            "size": "L"
+          },
+          {
+            "model": "VN",
+            "color": "بيبي بلو",
+            "size": "L"
+          }
+        ],
+        "model": "VN",
+        "color": "بيج",
+        "size": "L",
+        "sales": "B",
+        "notes": "",
+        "createdAt": "2026-03-19T20:11:53.733Z"
+      }
+    },
+    {
+      "type": "order",
+      "deletedAt": "2026-04-15T12:00:53.804Z",
+      "deletedBy": "admin",
+      "reason": "الاوردر راح مقاس غلط",
+      "data": {
+        "id": 1048,
+        "date": "2026-04-06",
+        "day": "الإثنين",
+        "clientName": "الاء متولى",
+        "phones": [
+          "01220170626"
+        ],
+        "phone": "01220170626",
+        "items": [
+          {
+            "model": "B2L",
+            "color": "بيج",
+            "size": "2XL"
+          }
+        ],
+        "model": "B2L",
+        "color": "بيج",
+        "size": "2XL",
+        "sales": "ٍSh",
+        "notes": "",
+        "createdAt": "2026-04-06T13:07:20.054Z",
+        "status": "delivered"
+      }
+    },
+    {
+      "type": "order",
+      "deletedAt": "2026-04-30T12:49:41.193Z",
+      "deletedBy": "admin",
+      "reason": "العميلة مردتش",
+      "data": {
+        "id": 1061,
+        "date": "2026-04-17",
+        "day": "الجمعة",
+        "clientName": "اسماء محمد",
+        "phones": [
+          "01097649001"
+        ],
+        "phone": "01097649001",
+        "items": [
+          {
+            "model": "pt روزالين",
+            "color": "اسود",
+            "size": "XL"
+          },
+          {
+            "model": "جيب بليسه",
+            "color": "اسود",
+            "size": "OS"
+          }
+        ],
+        "model": "pt روزالين",
+        "color": "اسود",
+        "size": "XL",
+        "sales": "ٍSh",
+        "notes": "استلام من الفرع",
+        "createdAt": "2026-04-17T19:51:12.122Z",
+        "status": "prepared"
+      }
+    }
+  ],
+  "defects": [
+    {
+      "id": 1776699247786,
+      "date": "2026-04-20",
+      "day": "الإثنين",
+      "model": "BK كونكورد",
+      "color": "بروجندى",
+      "size": "3XL",
+      "qty": 1,
+      "type": "ديفو في الخياطة",
+      "sales": "mark",
+      "notes": "خياطة الكم مفتوحة",
+      "createdAt": "2026-04-20T15:34:07.786Z",
+      "createdBy": "admin"
+    },
+    {
+      "id": 1776681746080,
+      "date": "2026-04-20",
+      "day": "الإثنين",
+      "model": "vwpt",
+      "color": "ابيض",
+      "size": "XL",
+      "qty": 1,
+      "type": "أخرى",
+      "sales": "mark",
+      "notes": "عفونة فى النسيج",
+      "createdAt": "2026-04-20T10:42:26.080Z",
+      "createdBy": "admin"
+    },
+    {
+      "id": 1776681680272,
+      "date": "2026-04-20",
+      "day": "الإثنين",
+      "model": "Vwb",
+      "color": "ابيض",
+      "size": "M",
+      "qty": 1,
+      "type": "أخرى",
+      "sales": "mark",
+      "notes": "عفونة فى النسيج",
+      "createdAt": "2026-04-20T10:41:20.272Z",
+      "createdBy": "admin"
+    }
+  ],
+  "shipments": []
+}
