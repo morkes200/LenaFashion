@@ -2313,7 +2313,7 @@ td {
     <div class="status-bar-right">
       <span class="status-text" id="statusText">جاري الاتصال...</span>
       <span class="status-dash">|</span>
-      <span class="status-version">v1.0.0</span>
+      <span class="status-version">v3.4.0</span>
       <button class="status-btn" onclick="checkConnection()" title="فحص الاتصال">🔄</button>
       <button class="status-btn" onclick="showSysInfo()" title="معلومات النظام">ℹ️</button>
       <button class="status-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="رجوع للأعلى">⬆️</button>
@@ -2404,7 +2404,7 @@ function showSysInfo() {
   const ordersCount = DB.orders ? DB.orders.length : 0;
   const clientsCount = DB.clients ? DB.clients.length : 0;
   const totalRevenue = DB.orders ? DB.orders.reduce((s, o) => s + (Number(o.total) || 0), 0) : 0;
-  toast(`📦 الأوردرات: ${ordersCount} | 👥 العملاء: ${clientsCount} | 💰 الإيرادات: ${totalRevenue.toLocaleString()} ج.م | v1.0.0`, 'info', 6000);
+  toast(`📦 الأوردرات: ${ordersCount} | 👥 العملاء: ${clientsCount} | 💰 الإيرادات: ${totalRevenue.toLocaleString()} ج.م | v3.4.0`, 'info', 6000);
 }
 
 // Debounced render functions for search inputs
