@@ -4231,6 +4231,7 @@ function confirmListDelete() {
 let _lastPage = '';
 function showPage(name) {
   if (name === _lastPage) return;
+  if (name !== 'settings') _settingsAccess = false;
   if (name === 'settings' && !_settingsAccess) {
     document.getElementById('settingsPassModal').style.display = 'flex';
     document.getElementById('settingsPassInput').value = '';
