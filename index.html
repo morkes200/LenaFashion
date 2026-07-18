@@ -734,6 +734,12 @@ td {
   font-family: 'Cairo', sans-serif; font-size: 0.65rem; font-weight: 600;
   color: rgba(255,255,255,0.3); letter-spacing: 0.5px;
 }
+.status-btn {
+  background: none; border: none; cursor: pointer;
+  font-size: 0.75rem; padding: 2px 4px; border-radius: 4px;
+  transition: background 0.2s;
+}
+.status-btn:hover { background: rgba(255,255,255,0.1); }
 .status-text {
   font-family: 'Cairo', sans-serif; font-size: 0.65rem; font-weight: 600;
   color: rgba(255,255,255,0.5); margin-left: auto;
@@ -2308,6 +2314,9 @@ td {
       <span class="status-text" id="statusText">جاري الاتصال...</span>
       <span class="status-dash">|</span>
       <span class="status-version">v1.0.0</span>
+      <button class="status-btn" onclick="checkConnection()" title="فحص الاتصال">🔄</button>
+      <button class="status-btn" onclick="showSysInfo()" title="معلومات النظام">ℹ️</button>
+      <button class="status-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="رجوع للأعلى">⬆️</button>
     </div>
   </div>
 </div>
@@ -2390,6 +2399,13 @@ async function checkConnection() {
   } catch { updateStatusBar(false); }
 }
 setInterval(checkConnection, 30000);
+
+function showSysInfo() {
+  const ordersCount = DB.orders ? DB.orders.length : 0;
+  const clientsCount = DB.clients ? DB.clients.length : 0;
+  const totalRevenue = DB.orders ? DB.orders.reduce((s, o) => s + (Number(o.total) || 0), 0) : 0;
+  toast(`📦 الأوردرات: ${ordersCount} | 👥 العملاء: ${clientsCount} | 💰 الإيرادات: ${totalRevenue.toLocaleString()} ج.م | v1.0.0`, 'info', 6000);
+}
 
 // Debounced render functions for search inputs
 window._debouncedRenderOrders = debounce(renderOrdersTable, 250);
