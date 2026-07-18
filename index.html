@@ -709,6 +709,10 @@ td {
 .status-bar-inner {
   display: flex; align-items: center; gap: 10px;
   max-width: 1200px; margin: 0 auto;
+  justify-content: space-between;
+}
+.status-bar-left, .status-bar-right {
+  display: flex; align-items: center; gap: 10px;
 }
 .status-dot {
   width: 10px; height: 10px; border-radius: 50%;
@@ -725,6 +729,10 @@ td {
 .status-hard {
   font-family: 'Cairo', sans-serif; font-size: 0.7rem; font-weight: 700;
   color: rgba(255,255,255,0.5);
+}
+.status-version {
+  font-family: 'Cairo', sans-serif; font-size: 0.65rem; font-weight: 600;
+  color: rgba(255,255,255,0.3); letter-spacing: 0.5px;
 }
 .status-text {
   font-family: 'Cairo', sans-serif; font-size: 0.65rem; font-weight: 600;
@@ -2290,11 +2298,17 @@ td {
 <!-- ═══ Status Bar ═══ -->
 <div class="status-bar" id="statusBar">
   <div class="status-bar-inner">
-    <div class="status-dot" id="statusDot"></div>
-    <span class="status-label" id="statusLabel">LENA FASHION</span>
-    <span class="status-dash">|</span>
-    <span class="status-hard">🖥️</span>
-    <span class="status-text" id="statusText">جاري الاتصال...</span>
+    <div class="status-bar-left">
+      <div class="status-dot" id="statusDot"></div>
+      <span class="status-label" id="statusLabel">LENA FASHION</span>
+      <span class="status-dash">|</span>
+      <span class="status-hard">🖥️</span>
+    </div>
+    <div class="status-bar-right">
+      <span class="status-text" id="statusText">جاري الاتصال...</span>
+      <span class="status-dash">|</span>
+      <span class="status-version">v1.0.0</span>
+    </div>
   </div>
 </div>
 
