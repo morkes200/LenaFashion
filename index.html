@@ -1104,6 +1104,24 @@ td {
   </div>
 </div>
 
+<!-- Settings password modal -->
+<div id="settingsPassModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:99999;align-items:center;justify-content:center;">
+  <div style="background:#fff;border-radius:18px;padding:28px 28px 22px;max-width:320px;width:90%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.3);">
+    <div style="font-size:2.5rem;margin-bottom:8px;">🔒</div>
+    <div style="font-family:Cairo,sans-serif;font-weight:900;font-size:1rem;color:#0f1e3c;margin-bottom:6px;">حماية الإعدادات</div>
+    <div style="font-family:Cairo,sans-serif;font-size:0.82rem;color:#7a8aaa;margin-bottom:18px;">أدخل كلمة مرور الإعدادات للمتابعة</div>
+    <div id="settingsPassError" style="display:none;background:#fef2f2;border:1.5px solid #fecaca;border-radius:9px;padding:8px 12px;margin-bottom:14px;color:#991b1b;font-family:Cairo,sans-serif;font-size:0.82rem;font-weight:600;"></div>
+    <input id="settingsPassInput" type="password" placeholder="••••••"
+      style="width:100%;padding:11px 14px;border:2px solid #dde3f0;border-radius:9px;font-family:Cairo,sans-serif;font-size:0.95rem;direction:rtl;outline:none;background:#f8faff;text-align:center;margin-bottom:16px;"
+      onfocus="this.style.borderColor='#1a3a6e'" onblur="this.style.borderColor='#dde3f0'"
+      onkeydown="if(event.key==='Enter')checkSettingsPass()">
+    <div style="display:flex;gap:10px;">
+      <button onclick="checkSettingsPass()" style="flex:1;padding:11px;background:linear-gradient(135deg,#0f1e3c,#1a3a6e);color:#fff;border:none;border-radius:10px;font-family:Cairo,sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer;">دخول</button>
+      <button onclick="closeSettingsPass()" style="flex:1;padding:11px;background:#f1f5f9;color:#475569;border:none;border-radius:10px;font-family:Cairo,sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer;">إلغاء</button>
+    </div>
+  </div>
+</div>
+
 <!-- WhatsApp confirm popup -->
 <div id="waModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:99999;align-items:center;justify-content:center;">
   <div style="background:#fff;border-radius:18px;padding:28px 28px 22px;max-width:320px;width:90%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.3);">
@@ -1525,6 +1543,20 @@ td {
     <div class="card">
       <div class="card-title">👥 المستخدمون الحاليون</div>
       <div id="usersList" style="display:flex;flex-direction:column;gap:10px;"></div>
+    </div>
+
+    <!-- Change settings password -->
+    <div class="card" id="settingsPassCard">
+      <div class="card-title">🔒 تغيير كلمة مرور الإعدادات</div>
+      <div style="display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap;">
+        <div class="form-group" style="flex:1;min-width:180px;">
+          <label>كلمة المرور الجديدة</label>
+          <input id="newSettingsPass" type="password" placeholder="••••••"
+            style="padding:10px 14px;border:2px solid var(--border);border-radius:var(--r2);font-family:'Cairo',sans-serif;font-size:0.92rem;direction:ltr;outline:none;background:#f9fafc;width:100%;transition:all 0.2s;font-weight:600;"
+            onfocus="this.style.borderColor='var(--blue2)'" onblur="this.style.borderColor='var(--border)'">
+        </div>
+        <button class="btn btn-primary" onclick="changeSettingsPass()" style="margin-top:2px;">💾 حفظ</button>
+      </div>
     </div>
 
   </div>
@@ -2302,6 +2334,7 @@ async function load() {
   if (!DB.trash) DB.trash = [];
   if (!DB.defects) DB.defects = [];
   if (!DB.shipments) DB.shipments = [];
+  if (!DB.settingsPassword) DB.settingsPassword = 'admin123';
 }
 
 // ── Auth ──────────────────────────────────────────────────────────────────────
@@ -2338,11 +2371,35 @@ function doLogin() {
 function doLogout() {
   if (!confirm('هل تريد تسجيل الخروج؟')) return;
   currentUser = null;
+  window._settingsAccess = false;
   document.getElementById('loginScreen').style.display = 'flex';
   document.getElementById('loginUsername').value = '';
   document.getElementById('loginPassword').value = '';
   document.getElementById('loginError').style.display = 'none';
   document.getElementById('loginUsername').focus();
+}
+
+let _settingsAccess = false;
+
+function checkSettingsPass() {
+  const input = document.getElementById('settingsPassInput');
+  const errEl = document.getElementById('settingsPassError');
+  if (input.value === DB.settingsPassword) {
+    _settingsAccess = true;
+    closeSettingsPass();
+    showPage('settings');
+  } else {
+    errEl.textContent = '❌ كلمة المرور غير صحيحة';
+    errEl.style.display = 'block';
+    input.value = '';
+    input.focus();
+  }
+}
+
+function closeSettingsPass() {
+  document.getElementById('settingsPassModal').style.display = 'none';
+  document.getElementById('settingsPassInput').value = '';
+  document.getElementById('settingsPassError').style.display = 'none';
 }
 
 // ── Permissions ───────────────────────────────────────────────────────────────
@@ -2594,6 +2651,18 @@ function renderUsersList() {
       <div style="display:flex;flex-wrap:wrap;gap:5px;">${permTags}</div>`;
     el.appendChild(div);
   });
+}
+
+function changeSettingsPass() {
+  const newPass = document.getElementById('newSettingsPass').value.trim();
+  if (!newPass || newPass.length < 4) {
+    toast('⚠️ كلمة المرور يجب أن تكون 4 أحرف على الأقل', 'error');
+    return;
+  }
+  DB.settingsPassword = newPass;
+  save();
+  document.getElementById('newSettingsPass').value = '';
+  toast('✅ تم تغيير كلمة مرور الإعدادات بنجاح');
 }
 
 // ── Login username dropdown ────────────────────────────────────────────────────
@@ -4162,6 +4231,13 @@ function confirmListDelete() {
 let _lastPage = '';
 function showPage(name) {
   if (name === _lastPage) return;
+  if (name === 'settings' && !_settingsAccess) {
+    document.getElementById('settingsPassModal').style.display = 'flex';
+    document.getElementById('settingsPassInput').value = '';
+    document.getElementById('settingsPassError').style.display = 'none';
+    setTimeout(() => document.getElementById('settingsPassInput').focus(), 100);
+    return;
+  }
   _lastPage = name;
   // stop home clock when leaving home
   if (name !== 'home' && homeClockInterval) { clearInterval(homeClockInterval); homeClockInterval = null; }
