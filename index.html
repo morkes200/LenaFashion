@@ -2562,36 +2562,7 @@ function requirePerm(perm) {
 }
 
 function applyPermissions() {
-  // Nav tabs
-  const navMap = {
-    'nav-reports':  'viewReports',
-    'nav-clients':  'viewClients',
-    'nav-defects':  'viewDefects',
-    'nav-shipping': 'viewShipping',
-    'nav-trash':    'viewTrash',
-    'nav-settings': 'manageSettings',
-  };
-  Object.entries(navMap).forEach(([id, perm]) => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    // admin always sees everything
-    el.style.display = (currentUser?.role === 'admin' || hasPerm(perm)) ? '' : 'none';
-  });
-  // nav-entry: needs addOrder
-  const navEntry = document.getElementById('nav-entry');
-  if (navEntry) navEntry.style.display = (currentUser?.role === 'admin' || hasPerm('addOrder')) ? '' : 'none';
-  // nav-orders: needs at least one order permission (add/edit/delete)
-  const navOrders = document.getElementById('nav-orders');
-  if (navOrders) navOrders.style.display = (currentUser?.role === 'admin' || hasPerm('addOrder') || hasPerm('editOrder') || hasPerm('deleteOrder')) ? '' : 'none';
-  // save order button
-  const saveBtn = document.getElementById('saveOrderBtn');
-  if (saveBtn) saveBtn.style.display = hasPerm('addOrder') ? '' : 'none';
-  // quick delete box
-  const qdBox = document.getElementById('quickDeleteBox');
-  if (qdBox) qdBox.style.display = (currentUser?.role === 'admin' || hasPerm('deleteOrder')) ? '' : 'none';
-  // users sub-tab: admin only
-  const stabUsers = document.getElementById('stab-users');
-  if (stabUsers) stabUsers.style.display = currentUser?.role === 'admin' ? '' : 'none';
+  // جميع الأزرار تبقى ظاهرة — الصلاحيات تُتحقق وقت الضغط فقط
 }
 
 function toggleNewUserPerms(role) {
@@ -3491,19 +3462,17 @@ function renderOrdersTable() {
       <td style="text-align:right;">${itemsHTML}</td>
       <td>${o.sales}</td>
       <td style="text-align:center;">
-        ${hasPerm('editOrder')
-          ? `<select class="status-select ${statusCls}" onchange="changeOrderStatus(${o.id},this.value);this.className='status-select '+( this.value==='prepared'?'status-prepared':this.value==='delivered'?'status-delivered':'status-new')">
+        <select class="status-select ${statusCls}" onchange="changeOrderStatus(${o.id},this.value);this.className='status-select '+( this.value==='prepared'?'status-prepared':this.value==='delivered'?'status-delivered':'status-new')">
           <option value="new"       ${status==='new'       ?'selected':''}>⏳ جديد</option>
           <option value="prepared"  ${status==='prepared'  ?'selected':''}>✅ تم التجهيز</option>
           <option value="delivered" ${status==='delivered' ?'selected':''}>🚚 تم التسليم</option>
-        </select>`
-          : `<span class="status-select ${statusCls}" style="display:inline-block;pointer-events:none;">${status==='new'?'⏳ جديد':status==='prepared'?'✅ تم التجهيز':'🚚 تم التسليم'}</span>`}
+        </select>
       </td>
       <td style="max-width:140px;font-size:0.85rem;color:#555;text-align:right;">${o.notes ? `<span title="${o.notes}" style="display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">📝 ${o.notes}</span>` : '<span style="color:#bbb;">—</span>'}</td>
       <td><div class="action-cell">
         <button class="btn-info-btn" title="بيانات العميل" onclick="showClientInfo('${o.clientName.replace(/'/g,"\\'")}')">👤</button>
-        ${hasPerm('editOrder')   ? `<button class="btn-edit-order" title="تعديل الأوردر" onclick="openEditModal(${o.id})">✏️</button>` : ''}
-        ${hasPerm('deleteOrder') ? `<button class="btn-del" title="حذف الأوردر" onclick="confirmDeleteOrder(${o.id})">🗑</button>` : ''}
+        <button class="btn-edit-order" title="تعديل الأوردر" onclick="openEditModal(${o.id})">✏️</button>
+        <button class="btn-del" title="حذف الأوردر" onclick="confirmDeleteOrder(${o.id})">🗑</button>
       </div></td>
     `;
   });
@@ -3642,8 +3611,8 @@ function renderClientsTable() {
       <td><span class="badge badge-blue">${orderCount}</span></td>
       <td><div class="action-cell">
         <button class="btn-info-btn" title="بيانات العميل" onclick="showClientInfo('${c.name.replace(/'/g,"\\'")}')">👤</button>
-        ${hasPerm('editClient') ? `<button class="btn-edit-order" title="تعديل العميل" onclick="openEditClientModal('${c.name.replace(/'/g,"\\'")}')">✏️</button>` : ''}
-        ${hasPerm('deleteClient') ? `<button class="btn-del" title="حذف العميل" onclick="confirmDeleteClient('${c.name.replace(/'/g,"\\'")}')">🗑</button>` : ''}
+        <button class="btn-edit-order" title="تعديل العميل" onclick="openEditClientModal('${c.name.replace(/'/g,"\\'")}')">✏️</button>
+        <button class="btn-del" title="حذف العميل" onclick="confirmDeleteClient('${c.name.replace(/'/g,"\\'")}')">🗑</button>
       </div></td>
     </tr>`;
   });
@@ -4593,10 +4562,10 @@ function renderTrashTable() {
       <td style="font-size:0.85rem;padding:10px 12px;">${details}</td>
       <td style="text-align:center;">
         <div style="display:flex;flex-direction:column;gap:5px;align-items:center;">
-          ${hasPerm('restoreTrash') ? `<button onclick="restoreFromTrash(${item._idx})"
-            style="background:#dcfce7;color:#166534;border:none;border-radius:7px;padding:5px 12px;cursor:pointer;font-family:Cairo,sans-serif;font-size:0.78rem;font-weight:700;white-space:nowrap;">↩️ استعادة</button>` : ''}
-          ${hasPerm('deleteOrder') ? `<button onclick="deleteFromTrash(${item._idx})"
-            style="background:#fee2e2;color:#dc2626;border:none;border-radius:7px;padding:5px 12px;cursor:pointer;font-family:Cairo,sans-serif;font-size:0.78rem;font-weight:700;white-space:nowrap;">🗑 حذف نهائي</button>` : ''}
+          <button onclick="restoreFromTrash(${item._idx})"
+            style="background:#dcfce7;color:#166534;border:none;border-radius:7px;padding:5px 12px;cursor:pointer;font-family:Cairo,sans-serif;font-size:0.78rem;font-weight:700;white-space:nowrap;">↩️ استعادة</button>
+          <button onclick="deleteFromTrash(${item._idx})"
+            style="background:#fee2e2;color:#dc2626;border:none;border-radius:7px;padding:5px 12px;cursor:pointer;font-family:Cairo,sans-serif;font-size:0.78rem;font-weight:700;white-space:nowrap;">🗑 حذف نهائي</button>
         </div>
       </td>
     </tr>`;
@@ -4677,14 +4646,11 @@ function initShippingPage() {
 }
 
 function switchShippingTab(tab) {
-  const canAdd = currentUser?.role === 'admin' || hasPerm('addShipment');
-  if (tab === 'entry' && !canAdd) tab = 'report';
   document.getElementById('shipping-panel-entry').style.display  = tab === 'entry'  ? '' : 'none';
   document.getElementById('shipping-panel-report').style.display = tab === 'report' ? '' : 'none';
   ['entry','report'].forEach(t => {
     const btn = document.getElementById('shtab-' + t);
     if (!btn) return;
-    if (t === 'entry') { btn.style.display = canAdd ? '' : 'none'; }
     btn.style.borderBottomColor = t === tab ? 'var(--blue2)' : 'transparent';
     btn.style.color      = t === tab ? 'var(--blue2)' : 'var(--muted)';
     btn.style.fontWeight = t === tab ? '800' : '700';
@@ -4777,7 +4743,7 @@ function renderShipTable() {
         ? `<img src="${s.image}" style="width:52px;height:40px;object-fit:cover;border-radius:6px;border:1.5px solid var(--border);cursor:pointer;" onclick="openImgViewer('${s.image}')" title="عرض البوليصة">`
         : '<span style="color:#ccc;font-size:0.8rem;">لا يوجد</span>'}</td>
       <td>
-        ${hasPerm('deleteShipment') ? `<button class="btn-del" title="حذف" onclick="deleteShipment(${s.id})">🗑</button>` : ''}
+        <button class="btn-del" title="حذف" onclick="deleteShipment(${s.id})">🗑</button>
       </td>
     </tr>`).join('');
 }
@@ -5073,14 +5039,11 @@ function populateDefectSelects() {
 }
 
 function switchDefectsTab(tab) {
-  const canAdd = currentUser?.role === 'admin' || hasPerm('addDefect');
-  if (tab === 'entry' && !canAdd) tab = 'report';
   document.getElementById('defects-panel-entry').style.display  = tab === 'entry'  ? '' : 'none';
   document.getElementById('defects-panel-report').style.display = tab === 'report' ? '' : 'none';
   ['entry','report'].forEach(t => {
     const btn = document.getElementById('dtab-' + t);
     if (!btn) return;
-    if (t === 'entry') { btn.style.display = canAdd ? '' : 'none'; }
     btn.style.borderBottomColor = t === tab ? 'var(--blue2)' : 'transparent';
     btn.style.color      = t === tab ? 'var(--blue2)' : 'var(--muted)';
     btn.style.fontWeight = t === tab ? '800' : '700';
@@ -5159,8 +5122,8 @@ function renderDefectsTable() {
       <td style="max-width:140px;font-size:0.82rem;color:var(--muted);text-align:right;">${d.notes||'—'}</td>
       <td>
         <div class="action-cell">
-          ${hasPerm('editDefect') ? `<button class="btn-edit-order" title="تعديل الديفو" onclick="openEditDefectModal(${d.id})">✏️</button>` : ''}
-          ${hasPerm('deleteDefect') ? `<button class="btn-del" title="حذف الديفو" onclick="deleteDefect(${d.id})">🗑</button>` : ''}
+          <button class="btn-edit-order" title="تعديل الديفو" onclick="openEditDefectModal(${d.id})">✏️</button>
+          <button class="btn-del" title="حذف الديفو" onclick="deleteDefect(${d.id})">🗑</button>
         </div>
       </td>
     </tr>`).join('');
