@@ -1692,7 +1692,7 @@ td {
     </div>
 
     <!-- Quick delete by order number -->
-    <div style="background:#fff5f5;border:1.5px solid #fecaca;border-radius:10px;padding:14px 18px;margin-bottom:16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+    <div id="quickDeleteBox" style="background:#fff5f5;border:1.5px solid #fecaca;border-radius:10px;padding:14px 18px;margin-bottom:16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
       <span style="font-size:0.88rem;font-weight:700;color:#991b1b;white-space:nowrap;">🗑 حذف سريع:</span>
       <input type="text" id="quickDeleteInput" placeholder="أدخل رقم الأوردر أو اسم العميل..." 
         style="flex:1;min-width:200px;padding:8px 13px;border:1.5px solid #fecaca;border-radius:8px;font-family:'Cairo',sans-serif;font-size:0.9rem;direction:rtl;outline:none;background:#fff;"
@@ -2555,6 +2555,12 @@ function hasPerm(perm) {
   return (currentUser.permissions || []).includes(perm);
 }
 
+function requirePerm(perm) {
+  if (hasPerm(perm)) return true;
+  toast('⛔ ليس لديك صلاحية لهذا الإجراء', 'error');
+  return false;
+}
+
 function applyPermissions() {
   // Nav tabs
   const navMap = {
@@ -2571,9 +2577,18 @@ function applyPermissions() {
     // admin always sees everything
     el.style.display = (currentUser?.role === 'admin' || hasPerm(perm)) ? '' : 'none';
   });
+  // nav-entry: needs addOrder
+  const navEntry = document.getElementById('nav-entry');
+  if (navEntry) navEntry.style.display = (currentUser?.role === 'admin' || hasPerm('addOrder')) ? '' : 'none';
+  // nav-orders: needs at least one order permission (add/edit/delete)
+  const navOrders = document.getElementById('nav-orders');
+  if (navOrders) navOrders.style.display = (currentUser?.role === 'admin' || hasPerm('addOrder') || hasPerm('editOrder') || hasPerm('deleteOrder')) ? '' : 'none';
   // save order button
   const saveBtn = document.getElementById('saveOrderBtn');
   if (saveBtn) saveBtn.style.display = hasPerm('addOrder') ? '' : 'none';
+  // quick delete box
+  const qdBox = document.getElementById('quickDeleteBox');
+  if (qdBox) qdBox.style.display = (currentUser?.role === 'admin' || hasPerm('deleteOrder')) ? '' : 'none';
   // users sub-tab: admin only
   const stabUsers = document.getElementById('stab-users');
   if (stabUsers) stabUsers.style.display = currentUser?.role === 'admin' ? '' : 'none';
@@ -3010,6 +3025,7 @@ function addToList(listKey, inputId) {
 }
 
 function removeFromList(listKey, val) {
+  if (!requirePerm('manageLists')) return;
   DB.lists[listKey] = DB.lists[listKey].filter(v => v !== val);
   populateSelects();
   renderTagLists();
@@ -3105,6 +3121,7 @@ function renderPhoneTags() {
 
 // ── Save Order ────────────────────────────────────────────────────────────────
 function saveOrder() {
+  if (!requirePerm('addOrder')) return;
   const dateVal = document.getElementById('orderDate').value;
   const dayVal  = document.getElementById('orderDay').value;
   const name    = document.getElementById('clientName').value.trim();
@@ -3191,6 +3208,7 @@ let editItems = [];
 let editPhones = [];
 
 function openEditModal(id) {
+  if (!requirePerm('editOrder')) return;
   const o = DB.orders.find(x => x.id === id);
   if (!o) return;
 
@@ -3289,6 +3307,7 @@ function removeEditItem(idx) {
 }
 
 function saveEditOrder() {
+  if (!requirePerm('editOrder')) return;
   const id    = parseInt(document.getElementById('editOrderId').value);
   const o     = DB.orders.find(x => x.id === id);
   if (!o) return;
@@ -3368,6 +3387,7 @@ function statusBadge(status) {
 }
 
 function changeOrderStatus(id, val) {
+  if (!requirePerm('editOrder')) return;
   const o = DB.orders.find(x => x.id === id);
   if (!o) return;
   o.status = val;
@@ -3471,11 +3491,13 @@ function renderOrdersTable() {
       <td style="text-align:right;">${itemsHTML}</td>
       <td>${o.sales}</td>
       <td style="text-align:center;">
-        <select class="status-select ${statusCls}" onchange="changeOrderStatus(${o.id},this.value);this.className='status-select '+( this.value==='prepared'?'status-prepared':this.value==='delivered'?'status-delivered':'status-new')">
+        ${hasPerm('editOrder')
+          ? `<select class="status-select ${statusCls}" onchange="changeOrderStatus(${o.id},this.value);this.className='status-select '+( this.value==='prepared'?'status-prepared':this.value==='delivered'?'status-delivered':'status-new')">
           <option value="new"       ${status==='new'       ?'selected':''}>⏳ جديد</option>
           <option value="prepared"  ${status==='prepared'  ?'selected':''}>✅ تم التجهيز</option>
           <option value="delivered" ${status==='delivered' ?'selected':''}>🚚 تم التسليم</option>
-        </select>
+        </select>`
+          : `<span class="status-select ${statusCls}" style="display:inline-block;pointer-events:none;">${status==='new'?'⏳ جديد':status==='prepared'?'✅ تم التجهيز':'🚚 تم التسليم'}</span>`}
       </td>
       <td style="max-width:140px;font-size:0.85rem;color:#555;text-align:right;">${o.notes ? `<span title="${o.notes}" style="display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">📝 ${o.notes}</span>` : '<span style="color:#bbb;">—</span>'}</td>
       <td><div class="action-cell">
@@ -3620,8 +3642,8 @@ function renderClientsTable() {
       <td><span class="badge badge-blue">${orderCount}</span></td>
       <td><div class="action-cell">
         <button class="btn-info-btn" title="بيانات العميل" onclick="showClientInfo('${c.name.replace(/'/g,"\\'")}')">👤</button>
-        <button class="btn-edit-order" title="تعديل العميل" onclick="openEditClientModal('${c.name.replace(/'/g,"\\'")}')">✏️</button>
-        <button class="btn-del" title="حذف العميل" onclick="confirmDeleteClient('${c.name.replace(/'/g,"\\'")}')">🗑</button>
+        ${hasPerm('editClient') ? `<button class="btn-edit-order" title="تعديل العميل" onclick="openEditClientModal('${c.name.replace(/'/g,"\\'")}')">✏️</button>` : ''}
+        ${hasPerm('deleteClient') ? `<button class="btn-del" title="حذف العميل" onclick="confirmDeleteClient('${c.name.replace(/'/g,"\\'")}')">🗑</button>` : ''}
       </div></td>
     </tr>`;
   });
@@ -3657,6 +3679,7 @@ function showClientInfo(name) {
 let editClientPhones = [];
 
 function openEditClientModal(name) {
+  if (!requirePerm('editClient')) return;
   const c = DB.clients.find(x => x.name === name);
   if (!c) return;
   editClientPhones = Array.isArray(c.phones) ? [...c.phones] : [c.phone || ''].filter(Boolean);
@@ -3701,6 +3724,7 @@ function removeEditClientPhone(idx) {
 }
 
 function confirmEditClient() {
+  if (!requirePerm('editClient')) return;
   const originalName = document.getElementById('editClientOriginalName').value;
   const newName = document.getElementById('editClientName').value.trim();
 
@@ -3740,6 +3764,7 @@ function confirmEditClient() {
 let pendingDelete = null;
 
 function confirmDeleteOrder(id) {
+  if (!requirePerm('deleteOrder')) return;
   const o = DB.orders.find(x => x.id === id);
   if (!o) return;
   const items = o.items || [{ model: o.model, color: o.color, size: o.size }];
@@ -3757,6 +3782,7 @@ function confirmDeleteOrder(id) {
 }
 
 function confirmDeleteClient(name) {
+  if (!requirePerm('deleteClient')) return;
   const orderCount = DB.orders.filter(o => o.clientName === name).length;
   const c = DB.clients.find(x => x.name === name);
   const phones = c ? (Array.isArray(c.phones) ? c.phones : [c.phone||'']).filter(Boolean).join(' — ') : '';
@@ -4166,6 +4192,7 @@ function updateListAddPlaceholder() {
 }
 
 function addToListFromPage() {
+  if (!requirePerm('manageLists')) return;
   const type = document.getElementById('listTypeSelect').value;
   const val  = document.getElementById('listNewValue').value.trim();
   if (!val) { toast('⚠️ أدخل قيمة أولاً', 'warn'); return; }
@@ -4307,6 +4334,7 @@ const LIST_LABELS = { models:'موديل', colors:'لون', sizes:'مقاس', sa
 const LIST_ICONS  = { models:'👗', colors:'🎨', sizes:'📐', salesList:'🧑‍💼' };
 
 function removeFromListConfirm(listKey, val, usage) {
+  if (!requirePerm('manageLists')) return;
   pendingListDelete = { listKey, val };
   const icon  = LIST_ICONS[listKey]  || '📋';
   const label = LIST_LABELS[listKey] || 'عنصر';
@@ -4336,6 +4364,27 @@ function confirmListDelete() {
 let _lastPage = '';
 function showPage(name) {
   if (name === _lastPage) return;
+  // page access guard
+  const pagePerm = {
+    'reports':  'viewReports',
+    'clients':  'viewClients',
+    'defects':  'viewDefects',
+    'shipping': 'viewShipping',
+    'trash':    'viewTrash',
+    'settings': 'manageSettings',
+    'entry':    'addOrder',
+  };
+  const reqPerm = pagePerm[name];
+  let allowed = true;
+  if (name === 'orders') {
+    allowed = !currentUser || currentUser.role === 'admin' || hasPerm('addOrder') || hasPerm('editOrder') || hasPerm('deleteOrder');
+  } else if (reqPerm) {
+    allowed = !currentUser || currentUser.role === 'admin' || hasPerm(reqPerm);
+  }
+  if (!allowed) {
+    toast('⛔ ليس لديك صلاحية للوصول لهذه الصفحة', 'error');
+    return;
+  }
   if (name !== 'settings') _settingsAccess = false;
   if (name === 'settings' && !_settingsAccess) {
     document.getElementById('settingsPassModal').style.display = 'flex';
@@ -4410,6 +4459,7 @@ function clearAllTrash() {
 }
 
 function deleteFromTrash(idx) {
+  if (!requirePerm('deleteOrder')) return;
   DB.trash.splice(idx, 1);
   save();
   renderTrashTable();
@@ -4543,10 +4593,10 @@ function renderTrashTable() {
       <td style="font-size:0.85rem;padding:10px 12px;">${details}</td>
       <td style="text-align:center;">
         <div style="display:flex;flex-direction:column;gap:5px;align-items:center;">
-          <button onclick="restoreFromTrash(${item._idx})"
-            style="background:#dcfce7;color:#166534;border:none;border-radius:7px;padding:5px 12px;cursor:pointer;font-family:Cairo,sans-serif;font-size:0.78rem;font-weight:700;white-space:nowrap;">↩️ استعادة</button>
-          <button onclick="deleteFromTrash(${item._idx})"
-            style="background:#fee2e2;color:#dc2626;border:none;border-radius:7px;padding:5px 12px;cursor:pointer;font-family:Cairo,sans-serif;font-size:0.78rem;font-weight:700;white-space:nowrap;">🗑 حذف نهائي</button>
+          ${hasPerm('restoreTrash') ? `<button onclick="restoreFromTrash(${item._idx})"
+            style="background:#dcfce7;color:#166534;border:none;border-radius:7px;padding:5px 12px;cursor:pointer;font-family:Cairo,sans-serif;font-size:0.78rem;font-weight:700;white-space:nowrap;">↩️ استعادة</button>` : ''}
+          ${hasPerm('deleteOrder') ? `<button onclick="deleteFromTrash(${item._idx})"
+            style="background:#fee2e2;color:#dc2626;border:none;border-radius:7px;padding:5px 12px;cursor:pointer;font-family:Cairo,sans-serif;font-size:0.78rem;font-weight:700;white-space:nowrap;">🗑 حذف نهائي</button>` : ''}
         </div>
       </td>
     </tr>`;
@@ -4627,11 +4677,14 @@ function initShippingPage() {
 }
 
 function switchShippingTab(tab) {
+  const canAdd = currentUser?.role === 'admin' || hasPerm('addShipment');
+  if (tab === 'entry' && !canAdd) tab = 'report';
   document.getElementById('shipping-panel-entry').style.display  = tab === 'entry'  ? '' : 'none';
   document.getElementById('shipping-panel-report').style.display = tab === 'report' ? '' : 'none';
   ['entry','report'].forEach(t => {
     const btn = document.getElementById('shtab-' + t);
     if (!btn) return;
+    if (t === 'entry') { btn.style.display = canAdd ? '' : 'none'; }
     btn.style.borderBottomColor = t === tab ? 'var(--blue2)' : 'transparent';
     btn.style.color      = t === tab ? 'var(--blue2)' : 'var(--muted)';
     btn.style.fontWeight = t === tab ? '800' : '700';
@@ -4698,6 +4751,7 @@ function clearShipForm() {
 }
 
 function deleteShipment(id) {
+  if (!requirePerm('deleteShipment')) return;
   if (!confirm('هل تريد حذف هذا الطلب المشحون؟')) return;
   DB.shipments = DB.shipments.filter(s => s.id !== id);
   save();
@@ -5019,11 +5073,14 @@ function populateDefectSelects() {
 }
 
 function switchDefectsTab(tab) {
+  const canAdd = currentUser?.role === 'admin' || hasPerm('addDefect');
+  if (tab === 'entry' && !canAdd) tab = 'report';
   document.getElementById('defects-panel-entry').style.display  = tab === 'entry'  ? '' : 'none';
   document.getElementById('defects-panel-report').style.display = tab === 'report' ? '' : 'none';
   ['entry','report'].forEach(t => {
     const btn = document.getElementById('dtab-' + t);
     if (!btn) return;
+    if (t === 'entry') { btn.style.display = canAdd ? '' : 'none'; }
     btn.style.borderBottomColor = t === tab ? 'var(--blue2)' : 'transparent';
     btn.style.color      = t === tab ? 'var(--blue2)' : 'var(--muted)';
     btn.style.fontWeight = t === tab ? '800' : '700';
@@ -5073,6 +5130,7 @@ function clearDefectForm() {
 }
 
 function deleteDefect(id) {
+  if (!requirePerm('deleteDefect')) return;
   if (!confirm('هل تريد حذف هذا العيب؟')) return;
   DB.defects = DB.defects.filter(d => d.id !== id);
   save();
@@ -5512,6 +5570,7 @@ function exportDefectPDF() {
 }
 
 function openEditDefectModal(id) {
+  if (!requirePerm('editDefect')) return;
   const d = DB.defects.find(x => x.id === id);
   if (!d) return;
 
@@ -5548,6 +5607,7 @@ function openEditDefectModal(id) {
 }
 
 function confirmEditDefect() {
+  if (!requirePerm('editDefect')) return;
   const id    = parseInt(document.getElementById('editDefectId').value);
   const d     = DB.defects.find(x => x.id === id);
   if (!d) return;
