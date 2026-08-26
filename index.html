@@ -1819,6 +1819,16 @@ td {
     </button>
   </div>
 
+  <!-- Report Tabs -->
+  <div style="display:flex;gap:0;border-bottom:2.5px solid #dde3f0;margin-bottom:20px;">
+    <button id="rptTab-orders" onclick="switchReportTab('orders')"
+      style="flex:1;padding:12px 20px;font-family:Cairo,sans-serif;font-size:1rem;font-weight:800;border:none;background:#fff;color:var(--blue2);cursor:pointer;border-bottom:3px solid var(--blue2);margin-bottom:-2.5px;transition:all 0.2s;">📊 تقارير الأوردرات</button>
+    <button id="rptTab-batches" onclick="switchReportTab('batches')"
+      style="flex:1;padding:12px 20px;font-family:Cairo,sans-serif;font-size:1rem;font-weight:800;border:none;background:#fff;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2.5px;transition:all 0.2s;">📦 تقارير التجميعات</button>
+  </div>
+
+  <!-- ═══ Orders Report Panel ═══ -->
+  <div id="rptPanel-orders">
   <div class="card">
     <div class="card-title">📊 تقرير الأوردرات</div>
     <div class="filter-row">
@@ -1864,18 +1874,13 @@ td {
         <div class="stat-card" style="background:#dbeafe;border-color:#93c5fd;"><div class="stat-number" id="rpt-delivered" style="color:#1e40af;">0</div><div class="stat-label" style="color:#1e40af;">🚚 تم التسليم</div></div>
       </div>
 
-      <!-- Model breakdown table -->
       <div style="margin-top:14px;">
         <div style="font-weight:700;color:var(--navy);font-size:0.92rem;margin-bottom:10px;">👟 ملخص القطع بالموديل</div>
         <div class="table-wrap" style="max-height:260px;overflow-y:auto;">
           <table>
             <thead>
               <tr>
-                <th>#</th>
-                <th>الموديل</th>
-                <th>اللون</th>
-                <th>المقاس</th>
-                <th style="text-align:center;">عدد القطع</th>
+                <th>#</th><th>الموديل</th><th>اللون</th><th>المقاس</th><th style="text-align:center;">عدد القطع</th>
               </tr>
             </thead>
             <tbody id="rptModelBreakdown"></tbody>
@@ -1903,9 +1908,11 @@ td {
       <div class="emoji">🔍</div><p>لا توجد نتائج — حدد الفلاتر واضغط عرض</p>
     </div>
   </div>
+  </div>
 
-  <!-- Batch Report Card -->
-  <div class="card" style="margin-top:20px;">
+  <!-- ═══ Batches Report Panel ═══ -->
+  <div id="rptPanel-batches" style="display:none;">
+  <div class="card">
     <div class="card-title">📦 تقرير التجميعات</div>
     <div class="filter-row">
       <div class="filter-group">
@@ -1927,6 +1934,7 @@ td {
       </div>
       <div class="filter-group" style="flex-direction:row;gap:8px;align-items:flex-end;">
         <button class="btn btn-warning" onclick="runBatchReport()">🔍 عرض</button>
+        <button class="btn btn-danger" onclick="exportBatchPDF()">📄 PDF</button>
         <button class="btn btn-outline" onclick="clearBatchReport()">مسح</button>
       </div>
     </div>
@@ -1946,14 +1954,9 @@ td {
       <table>
         <thead>
           <tr>
-            <th>#</th>
-            <th>اسم التجميعة</th>
-            <th>تاريخ الإنشاء</th>
-            <th>عدد الأوردرات</th>
-            <th>إجمالي القطع</th>
-            <th>السيلز</th>
-            <th>الحالة</th>
-            <th>تفاصيل</th>
+            <th>#</th><th>اسم التجميعة</th><th>تاريخ الإنشاء</th>
+            <th>عدد الأوردرات</th><th>إجمالي القطع</th>
+            <th>السيلز</th><th>الحالة</th>
           </tr>
         </thead>
         <tbody id="batchReportBody"></tbody>
@@ -1963,6 +1966,8 @@ td {
       <div class="emoji">📦</div><p>لا توجد نتائج — حدد الفلاتر واضغط عرض</p>
     </div>
   </div>
+  </div>
+
 </div>
 </div>
 
@@ -3733,6 +3738,19 @@ function clearReport() {
   document.getElementById('reportEmpty').style.display = 'none';
 }
 
+// ── Report Tab Switcher ───────────────────────────────────────────────────────
+function switchReportTab(tab) {
+  document.getElementById('rptPanel-orders').style.display  = tab === 'orders'  ? '' : 'none';
+  document.getElementById('rptPanel-batches').style.display = tab === 'batches' ? '' : 'none';
+  ['orders','batches'].forEach(t => {
+    const btn = document.getElementById('rptTab-' + t);
+    if (!btn) return;
+    btn.style.borderBottomColor = t === tab ? 'var(--blue2)' : 'transparent';
+    btn.style.color = t === tab ? 'var(--blue2)' : 'var(--muted)';
+    btn.style.fontWeight = t === tab ? '800' : '700';
+  });
+}
+
 // ── Batch Report ──────────────────────────────────────────────────────────────
 function runBatchReport() {
   const from   = document.getElementById('batchRptFrom').value;
@@ -3789,7 +3807,6 @@ function runBatchReport() {
       <td style="font-weight:800;color:var(--blue2);">${pieces}</td>
       <td style="font-size:0.85rem;">${sales || '—'}</td>
       <td><span class="status-select ${st.cls}" style="font-size:0.78rem;">${st.label}</span></td>
-      <td><button class="btn-info-btn" onclick="openBatchDetail(${b.id})">👁</button></td>
     </tr>`;
   }).join('');
 }
@@ -3801,6 +3818,118 @@ function clearBatchReport() {
   document.getElementById('batchReportBody').innerHTML = '';
   document.getElementById('batchReportSummary').style.display = 'none';
   document.getElementById('batchReportEmpty').style.display = 'none';
+}
+
+// ── Export Batch PDF ──────────────────────────────────────────────────────────
+function exportBatchPDF() {
+  const tbody = document.getElementById('batchReportBody');
+  if (!tbody || !tbody.rows.length) {
+    toast('⚠️ اعرض التقرير أولاً قبل التصدير', 'warn');
+    return;
+  }
+  const from     = document.getElementById('batchRptFrom').value;
+  const to       = document.getElementById('batchRptTo').value;
+  const status   = document.getElementById('batchRptStatus').value;
+  const count    = document.getElementById('brpt-count').textContent;
+  const orders   = document.getElementById('brpt-orders').textContent;
+  const pieces   = document.getElementById('brpt-pieces').textContent;
+  const today    = formatDateDisplay(formatDateInput(new Date()));
+
+  let rowsHTML = '';
+  Array.from(tbody.rows).forEach((row, i) => {
+    const cells = Array.from(row.cells);
+    const bg = i % 2 === 0 ? '#ffffff' : '#f0f6ff';
+    rowsHTML += `<tr style="background:${bg};">`;
+    cells.forEach(td => {
+      rowsHTML += `<td style="padding:7px 9px;border:1px solid #d0d8ee;font-size:12px;text-align:center;">${td.innerText || td.textContent}</td>`;
+    });
+    rowsHTML += '</tr>';
+  });
+
+  const statusLabels = { new: '⏳ قيد التجميع', shipped: '🚚 تم الشحن', delivered: '✅ تم التسليم' };
+  const filterDesc = [
+    from && to ? `الفترة: ${formatDateDisplay(from)} — ${formatDateDisplay(to)}` : '',
+    status ? `الحالة: ${statusLabels[status] || status}` : '',
+  ].filter(Boolean).join('  |  ');
+
+  const html = `<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;900&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Cairo', Arial, sans-serif; background: #fff; color: #1a2340; direction: rtl; padding: 28px; font-weight: 700; }
+  .header { background: linear-gradient(135deg,#0f1e3c,#1a3a6e); color: #fff; border-radius: 12px; padding: 20px 28px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
+  .header h1 { font-size: 26px; font-weight: 900; }
+  .header .logo-sub { font-size: 14px; color: #aac4e8; margin-top: 4px; font-weight: 700; }
+  .header .date-badge { background: rgba(255,255,255,0.12); border-radius: 8px; padding: 8px 14px; font-size: 14px; text-align: center; font-weight: 700; }
+  .meta { background: #f0f4ff; border-radius: 8px; padding: 12px 18px; margin-bottom: 18px; font-size: 14px; color: #445; display: flex; gap: 20px; flex-wrap: wrap; align-items: center; font-weight: 700; }
+  .meta span { font-weight: 900; color: #1a3a6e; }
+  .stats { display: flex; gap: 14px; margin-bottom: 20px; }
+  .stat { flex: 1; background: #f8faff; border: 2px solid #dde3f0; border-radius: 10px; padding: 12px; text-align: center; }
+  .stat .n { font-size: 26px; font-weight: 900; color: #0f1e3c; }
+  .stat .l { font-size: 12px; color: #7a8aaa; margin-top: 2px; font-weight: 700; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  thead th { background: #0f1e3c; color: #fff; padding: 11px 8px; text-align: center; font-size: 13px; font-weight: 900; }
+  tbody td { padding: 10px 8px; border: 1.5px solid #c8d0e8; font-size: 13px; font-weight: 700; }
+  tbody tr:nth-child(odd)  { background: #ffffff; }
+  tbody tr:nth-child(even) { background: #f0f6ff; }
+  tfoot td { background: #0f1e3c; color: #fff; font-weight: 900; text-align: center; padding: 10px; font-size: 14px; border: 1.5px solid #0f1e3c; }
+  .footer { margin-top: 20px; text-align: center; font-size: 12px; color: #888; border-top: 2px solid #eee; padding-top: 12px; font-weight: 700; }
+  @media print {
+    body { padding: 10px; }
+    @page { margin: 12mm; size: A4 landscape; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <div class="logo-sub">👗 LENA FASHION — نظام الأوردرات</div>
+    <h1>تقرير التجميعات</h1>
+  </div>
+  <div class="date-badge">
+    <div style="font-size:11px;color:#aac4e8;">تاريخ الطباعة</div>
+    <div style="font-size:16px;font-weight:900;">${today}</div>
+  </div>
+</div>
+
+${filterDesc ? `<div class="meta"><span>📋 فلاتر التقرير:</span> ${filterDesc}</div>` : ''}
+
+<div class="stats">
+  <div class="stat"><div class="n">${count}</div><div class="l">📦 إجمالي التجميعات</div></div>
+  <div class="stat"><div class="n">${orders}</div><div class="l">📋 إجمالي الأوردرات</div></div>
+  <div class="stat" style="background:#fef3c7;border-color:#fcd34d;"><div class="n" style="color:#92400e;">${pieces}</div><div class="l" style="color:#92400e;">🧵 إجمالي القطع</div></div>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>#</th><th>اسم التجميعة</th><th>تاريخ الإنشاء</th>
+      <th>عدد الأوردرات</th><th>إجمالي القطع</th><th>السيلز</th><th>الحالة</th>
+    </tr>
+  </thead>
+  <tbody>${rowsHTML}</tbody>
+  <tfoot>
+    <tr><td colspan="7">إجمالي التجميعات: ${count} | إجمالي الأوردرات: ${orders} | إجمالي القطع: ${pieces}</td></tr>
+  </tfoot>
+</table>
+
+<div class="footer">👗 LENA FASHION — تم إنشاء هذا التقرير بتاريخ ${today}</div>
+
+<div style="margin-top:24px;text-align:center;">
+  <button onclick="window.print()" style="background:#0f1e3c;color:#fff;border:none;padding:12px 32px;border-radius:8px;font-family:Cairo,sans-serif;font-size:15px;font-weight:900;cursor:pointer;">🖨️ طباعة / حفظ PDF</button>
+  <button onclick="window.close()" style="background:#e74c3c;color:#fff;border:none;padding:12px 24px;border-radius:8px;font-family:Cairo,sans-serif;font-size:15px;font-weight:900;cursor:pointer;margin-right:10px;">✕ إغلاق</button>
+</div>
+
+<script>window.onload = () => setTimeout(() => window.print(), 800);<\/script>
+</body></html>`;
+
+  const win = window.open('','_blank');
+  win.document.write(html);
+  win.document.close();
 }
 
 // ── Clients Table ─────────────────────────────────────────────────────────────
