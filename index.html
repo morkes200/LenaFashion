@@ -1762,7 +1762,7 @@ td {
 </div>
 
 <!-- Create Batch Modal -->
-<div id="createBatchModal" class="modal-overlay" style="display:none;">
+<div id="createBatchModal" class="modal-overlay">
 <div class="modal" style="max-width:750px;max-height:85vh;overflow-y:auto;">
   <h3 id="createBatchTitle" style="margin:0 0 12px 0;">📦 تجميعة جديدة</h3>
 
@@ -1788,7 +1788,7 @@ td {
 </div>
 
 <!-- Batch Detail Modal -->
-<div id="batchDetailModal" class="modal-overlay" style="display:none;">
+<div id="batchDetailModal" class="modal-overlay">
 <div class="modal" style="max-width:800px;max-height:85vh;overflow-y:auto;">
   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
     <h3 id="batchDetailTitle" style="margin:0;">📦 تفاصيل التجميعة</h3>
@@ -4674,7 +4674,7 @@ function openCreateBatchModal() {
   search.value = '';
   document.getElementById('batchSelectedCount').textContent = '0';
   renderBatchOrderList();
-  document.getElementById('createBatchModal').style.display = 'flex';
+  document.getElementById('createBatchModal').classList.add('open');
 }
 
 function renderBatchOrderList() {
@@ -4882,7 +4882,7 @@ function openBatchDetail(id) {
       <tbody>${orderRows}</tbody>
     </table>`;
 
-  document.getElementById('batchDetailModal').style.display = 'flex';
+  document.getElementById('batchDetailModal').classList.add('open');
 }
 
 function deleteBatch(id) {
