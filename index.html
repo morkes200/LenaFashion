@@ -1201,6 +1201,7 @@ td {
     <button class="nav-btn active" onclick="showPage('home')" id="nav-home">🏠 الرئيسية</button>
     <button class="nav-btn" onclick="showPage('entry')" id="nav-entry">➕ إدخال أوردر</button>
     <button class="nav-btn" onclick="showPage('orders')" id="nav-orders">📦 الأوردرات</button>
+    <button class="nav-btn" onclick="showPage('batches')" id="nav-batches">📦 التجميعات</button>
     <button class="nav-btn" onclick="showPage('reports')" id="nav-reports">📊 التقارير</button>
     <button class="nav-btn" onclick="showPage('clients')" id="nav-clients">👥 العملاء</button>
     <button class="nav-btn" onclick="showPage('defects')" id="nav-defects">⚠️ الديفوهات</button>
@@ -1718,6 +1719,86 @@ td {
     <div id="ordersEmpty" class="empty" style="display:none;">
       <div class="emoji">📭</div><p>لا توجد أوردرات مسجلة بعد</p>
     </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- PAGE – التجميعات                             -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="page" id="page-batches">
+<div class="container">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:10px;">
+    <button onclick="showPage('home')"
+      style="background:var(--blue2);color:#fff;border:none;border-radius:10px;padding:10px 22px;font-family:Cairo,sans-serif;font-weight:800;font-size:0.92rem;cursor:pointer;">🏠 الرئيسية</button>
+    <h2 style="margin:0;">📦 التجميعات</h2>
+    <button onclick="openCreateBatchModal()"
+      style="background:#16a34a;color:#fff;border:none;border-radius:10px;padding:10px 22px;font-family:Cairo,sans-serif;font-weight:800;font-size:0.92rem;cursor:pointer;">➕ تجميعة جديدة</button>
+  </div>
+
+  <!-- Stats -->
+  <div id="batchStats" style="display:flex;gap:12px;margin-bottom:18px;flex-wrap:wrap;"></div>
+
+  <!-- Batches table -->
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>اسم التجميعة</th>
+          <th>عدد الأوردرات</th>
+          <th>إجمالي القطع</th>
+          <th>السيلز</th>
+          <th>تاريخ الإنشاء</th>
+          <th>الحالة</th>
+          <th>إجراءات</th>
+        </tr>
+      </thead>
+      <tbody id="batchesTableBody"></tbody>
+    </table>
+    <div id="batchesEmpty" class="empty-state" style="display:none;">📦 لا توجد تجميعات بعد</div>
+  </div>
+</div>
+</div>
+
+<!-- Create Batch Modal -->
+<div id="createBatchModal" class="modal-overlay" style="display:none;">
+<div class="modal" style="max-width:750px;max-height:85vh;overflow-y:auto;">
+  <h3 id="createBatchTitle" style="margin:0 0 12px 0;">📦 تجميعة جديدة</h3>
+
+  <!-- Step 1: Select orders -->
+  <div id="batchStep1">
+    <label style="font-weight:700;font-size:0.88rem;margin-bottom:6px;display:block;">اختر الأوردرات للتجميعة:</label>
+    <input type="text" id="batchOrderSearch" placeholder="🔍 بحث برقم الأوردر أو اسم العميل..."
+      style="width:100%;padding:8px 13px;border:1.5px solid var(--border);border-radius:8px;margin-bottom:10px;font-family:Cairo,sans-serif;font-size:0.9rem;direction:rtl;outline:none;"
+      oninput="filterBatchOrders()">
+    <div id="batchOrderList" style="max-height:300px;overflow-y:auto;border:1.5px solid var(--border);border-radius:8px;"></div>
+    <div style="margin-top:8px;font-size:0.85rem;color:#666;">
+      <span id="batchSelectedCount">0</span> أوردر محدد
+    </div>
+  </div>
+
+  <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:14px;">
+    <button onclick="closeModal('createBatchModal')"
+      style="background:#f1f5f9;color:#475569;border:1.5px solid #ddd;border-radius:8px;padding:8px 20px;font-family:Cairo,sans-serif;font-weight:700;cursor:pointer;">❌ إلغاء</button>
+    <button onclick="confirmCreateBatch()"
+      style="background:#16a34a;color:#fff;border:none;border-radius:8px;padding:8px 20px;font-family:Cairo,sans-serif;font-weight:700;cursor:pointer;">✅ إنشاء التجميعة</button>
+  </div>
+</div>
+</div>
+
+<!-- Batch Detail Modal -->
+<div id="batchDetailModal" class="modal-overlay" style="display:none;">
+<div class="modal" style="max-width:800px;max-height:85vh;overflow-y:auto;">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+    <h3 id="batchDetailTitle" style="margin:0;">📦 تفاصيل التجميعة</h3>
+    <div id="batchDetailStatus" style="display:flex;gap:6px;"></div>
+  </div>
+  <div id="batchDetailStats" style="display:flex;gap:12px;margin-bottom:14px;flex-wrap:wrap;"></div>
+  <div id="batchDetailOrders"></div>
+  <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:14px;">
+    <button onclick="closeModal('batchDetailModal')"
+      style="background:#f1f5f9;color:#475569;border:1.5px solid #ddd;border-radius:8px;padding:8px 20px;font-family:Cairo,sans-serif;font-weight:700;cursor:pointer;">❌ إغلاق</button>
   </div>
 </div>
 </div>
@@ -2335,12 +2416,14 @@ let DB = {
     salesList: [],
   },
   nextOrderNum: 1001,
+  nextBatchNum: 1,
   users: [
     { username: 'admin', password: 'admin123', role: 'admin' }
   ],
   trash: [],
   defects: [],
-  shipments: []
+  shipments: [],
+  batches: []
 };
 
 let currentUser = null;
@@ -2435,6 +2518,8 @@ async function load() {
   if (!DB.trash) DB.trash = [];
   if (!DB.defects) DB.defects = [];
   if (!DB.shipments) DB.shipments = [];
+  if (!DB.batches) DB.batches = [];
+  if (!DB.nextBatchNum) DB.nextBatchNum = 1;
   if (!DB.settingsPassword) DB.settingsPassword = 'admin123';
 }
 
@@ -2512,6 +2597,7 @@ const ALL_PERMS = [
   'manageLists',
   'viewDefects','addDefect','editDefect','deleteDefect',
   'viewShipping','addShipment','deleteShipment',
+  'viewBatches','manageBatches',
   'viewTrash','restoreTrash',
   'manageSettings'
 ];
@@ -2534,6 +2620,8 @@ const PERM_LABELS = {
   deleteShipment: '🗑 حذف شحنة',
   viewTrash:      '🗑 عرض المحذوفات',
   restoreTrash:   '↩️ استعادة محذوف',
+  viewBatches:    '📦 عرض التجميعات',
+  manageBatches:  '📦 إدارة التجميعات',
   manageSettings: '⚙️ الإعدادات',
 };
 
@@ -2545,6 +2633,7 @@ const PERM_GROUPS = [
   { label: '📋 القوائم',      perms: ['manageLists'] },
   { label: '⚠️ الديفوهات',   perms: ['viewDefects','addDefect','editDefect','deleteDefect'] },
   { label: '🚚 الشحن',       perms: ['viewShipping','addShipment','deleteShipment'] },
+  { label: '📦 التجميعات',   perms: ['viewBatches','manageBatches'] },
   { label: '🗑 المحذوفات',   perms: ['viewTrash','restoreTrash'] },
   { label: '⚙️ الإعدادات',   perms: ['manageSettings'] },
 ];
@@ -4340,6 +4429,7 @@ function showPage(name) {
     'defects':  'viewDefects',
     'shipping': 'viewShipping',
     'trash':    'viewTrash',
+    'batches':  'viewBatches',
     'settings': 'manageSettings',
     'entry':    'addOrder',
   };
@@ -4377,6 +4467,7 @@ function showPage(name) {
   if (name === 'clients')  renderClientsTable();
   if (name === 'reports')  fillSelect('rptSales', DB.lists.salesList, true);
   if (name === 'trash')    renderTrashTable();
+  if (name === 'batches')  renderBatchesTable();
   if (name === 'settings') { renderListsTable(); updateListAddPlaceholder(); switchSettingsTab('lists'); }
   if (name === 'defects')  { initDefectsPage(); }
   if (name === 'shipping') { initShippingPage(); }
@@ -4572,6 +4663,238 @@ function renderTrashTable() {
   }).join('');
 }
 
+
+// ── Batches (التجميعات) ──────────────────────────────────────────────────────
+let selectedBatchOrders = [];
+
+function openCreateBatchModal() {
+  if (!requirePerm('manageBatches')) return;
+  selectedBatchOrders = [];
+  const search = document.getElementById('batchOrderSearch');
+  search.value = '';
+  document.getElementById('batchSelectedCount').textContent = '0';
+  renderBatchOrderList();
+  document.getElementById('createBatchModal').style.display = 'flex';
+}
+
+function renderBatchOrderList() {
+  const list = document.getElementById('batchOrderList');
+  const q = (document.getElementById('batchOrderSearch')?.value || '').toLowerCase();
+  const batchedOrderIds = (DB.batches || []).flatMap(b => b.orders || []);
+  let available = DB.orders.filter(o => !batchedOrderIds.includes(o.id));
+  if (q) available = available.filter(o =>
+    String(o.id).includes(q) || (o.clientName||'').toLowerCase().includes(q)
+  );
+  if (!available.length) {
+    list.innerHTML = '<div style="padding:14px;text-align:center;color:#999;font-size:0.88rem;">لا توجد أوردرات متاحة للتجميع</div>';
+    return;
+  }
+  list.innerHTML = available.map(o => {
+    const items = o.items || [{ model: o.model, color: o.color, size: o.size }];
+    const pcs = items.length;
+    const sel = selectedBatchOrders.includes(o.id);
+    return `<div onclick="toggleBatchOrderSelection(${o.id})"
+      style="display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid #f0f0f0;cursor:pointer;${sel?'background:#dcfce7;':''}"
+      onmouseover="if(!selectedBatchOrders.includes(${o.id}))this.style.background='#f0f6ff'"
+      onmouseout="if(!selectedBatchOrders.includes(${o.id}))this.style.background=''">
+      <input type="checkbox" ${sel?'checked':''} style="accent-color:var(--blue2);width:16px;height:16px;">
+      <span class="badge badge-blue" style="font-weight:800;">#${o.id}</span>
+      <span style="font-weight:700;">${o.clientName||'—'}</span>
+      <span style="color:#888;font-size:0.82rem;">${items.map(it=>`${it.model||''} ${it.color||''} ${it.size||''}`).join(' | ')}</span>
+      <span style="margin-right:auto;font-size:0.82rem;color:var(--blue2);font-weight:700;">${pcs} قطعة</span>
+    </div>`;
+  }).join('');
+}
+
+function toggleBatchOrderSelection(id) {
+  const idx = selectedBatchOrders.indexOf(id);
+  if (idx >= 0) selectedBatchOrders.splice(idx, 1);
+  else selectedBatchOrders.push(id);
+  document.getElementById('batchSelectedCount').textContent = selectedBatchOrders.length;
+  renderBatchOrderList();
+}
+
+function filterBatchOrders() { renderBatchOrderList(); }
+
+function confirmCreateBatch() {
+  if (!requirePerm('manageBatches')) return;
+  if (!selectedBatchOrders.length) { toast('⚠️ اختر أوردر واحد على الأقل', 'warn'); return; }
+  const batch = {
+    id: DB.nextBatchNum++,
+    name: `تجميعة ${DB.nextBatchNum - 1}`,
+    orders: [...selectedBatchOrders],
+    status: 'new',
+    createdAt: new Date().toISOString(),
+    createdBy: currentUser ? currentUser.username : '—',
+    shippedAt: null,
+    deliveredAt: null
+  };
+  DB.batches.push(batch);
+  save();
+  closeModal('createBatchModal');
+  renderBatchesTable();
+  toast(`✅ تم إنشاء التجميعة رقم ${batch.id} (${batch.orders.length} أوردر)`, 'success');
+}
+
+function renderBatchesTable() {
+  const tbody = document.getElementById('batchesTableBody');
+  const empty = document.getElementById('batchesEmpty');
+  const stats = document.getElementById('batchStats');
+  if (!tbody) return;
+  const batches = (DB.batches || []).slice().sort((a,b) => b.id - a.id);
+
+  const totalOrders = batches.reduce((s,b) => s + b.orders.length, 0);
+  const totalPieces = batches.reduce((s,b) => s + countBatchPieces(b), 0);
+  const newBatches = batches.filter(b => b.status === 'new').length;
+  stats.innerHTML = `
+    <div style="background:#eff6ff;border:1.5px solid #93c5fd;border-radius:10px;padding:10px 18px;display:flex;flex-direction:column;align-items:center;min-width:100px;">
+      <span style="font-size:1.4rem;font-weight:900;color:#2563eb;">${batches.length}</span>
+      <span style="font-size:0.78rem;color:#1e40af;font-weight:700;">📦 التجميعات</span>
+    </div>
+    <div style="background:#dcfce7;border:1.5px solid #86efac;border-radius:10px;padding:10px 18px;display:flex;flex-direction:column;align-items:center;min-width:100px;">
+      <span style="font-size:1.4rem;font-weight:900;color:#16a34a;">${totalOrders}</span>
+      <span style="font-size:0.78rem;color:#15803d;font-weight:700;">📋 أوردرات</span>
+    </div>
+    <div style="background:#fef3c7;border:1.5px solid #fcd34d;border-radius:10px;padding:10px 18px;display:flex;flex-direction:column;align-items:center;min-width:100px;">
+      <span style="font-size:1.4rem;font-weight:900;color:#b45309;">${totalPieces}</span>
+      <span style="font-size:0.78rem;color:#92400e;font-weight:700;">🧵 قطع</span>
+    </div>
+    <div style="background:#f0fdf4;border:1.5px solid #86efac;border-radius:10px;padding:10px 18px;display:flex;flex-direction:column;align-items:center;min-width:100px;">
+      <span style="font-size:1.4rem;font-weight:900;color:#16a34a;">${newBatches}</span>
+      <span style="font-size:0.78rem;color:#15803d;font-weight:700;">⏳ قيد التجميع</span>
+    </div>`;
+
+  if (!batches.length) { tbody.innerHTML = ''; empty.style.display = 'block'; return; }
+  empty.style.display = 'none';
+
+  const statusMap = {
+    new:      { label: '⏳ قيد التجميع', cls: 'status-new' },
+    shipped:  { label: '🚚 تم الشحن',   cls: 'status-prepared' },
+    delivered:{ label: '✅ تم التسليم',  cls: 'status-delivered' },
+  };
+
+  tbody.innerHTML = batches.map((b, i) => {
+    const pieces = countBatchPieces(b);
+    const sales = getBatchSales(b);
+    const st = statusMap[b.status] || statusMap.new;
+    const created = b.createdAt ? new Date(b.createdAt).toLocaleDateString('ar-EG') : '—';
+    return `<tr style="background:${i%2===0?'#fff':'#fafbff'};">
+      <td>${i+1}</td>
+      <td style="font-weight:700;">📦 ${b.name} <span class="badge badge-blue" style="margin-right:4px;">#${b.id}</span></td>
+      <td><span class="badge badge-green">${b.orders.length}</span></td>
+      <td><span style="font-weight:800;color:var(--blue2);">${pieces}</span></td>
+      <td style="font-size:0.85rem;">${sales || '—'}</td>
+      <td style="font-size:0.85rem;">${created}</td>
+      <td>
+        <select class="status-select ${st.cls}" onchange="changeBatchStatus(${b.id},this.value)" style="font-size:0.78rem;">
+          <option value="new"       ${b.status==='new'       ?'selected':''}>⏳ قيد التجميع</option>
+          <option value="shipped"   ${b.status==='shipped'   ?'selected':''}>🚚 تم الشحن</option>
+          <option value="delivered" ${b.status==='delivered' ?'selected':''}>✅ تم التسليم</option>
+        </select>
+      </td>
+      <td><div class="action-cell">
+        <button class="btn-info-btn" title="تفاصيل" onclick="openBatchDetail(${b.id})">👁</button>
+        <button class="btn-del" title="حذف التجميعة" onclick="deleteBatch(${b.id})">🗑</button>
+      </div></td>
+    </tr>`;
+  }).join('');
+}
+
+function countBatchPieces(batch) {
+  let total = 0;
+  (batch.orders || []).forEach(oid => {
+    const o = DB.orders.find(x => x.id === oid);
+    if (o) total += (o.items || [{ model: o.model, color: o.color, size: o.size }]).length;
+  });
+  return total;
+}
+
+function getBatchSales(batch) {
+  const salesSet = new Set();
+  (batch.orders || []).forEach(oid => {
+    const o = DB.orders.find(x => x.id === oid);
+    if (o && o.sales) salesSet.add(o.sales);
+  });
+  return [...salesSet].join(', ');
+}
+
+function changeBatchStatus(id, val) {
+  if (!requirePerm('manageBatches')) return;
+  const b = (DB.batches || []).find(x => x.id === id);
+  if (!b) return;
+  b.status = val;
+  if (val === 'shipped')  b.shippedAt = new Date().toISOString();
+  if (val === 'delivered') b.deliveredAt = new Date().toISOString();
+  save();
+  renderBatchesTable();
+}
+
+function openBatchDetail(id) {
+  const b = (DB.batches || []).find(x => x.id === id);
+  if (!b) return;
+  document.getElementById('batchDetailTitle').textContent = `📦 ${b.name} (#${b.id})`;
+
+  const statusMap = {
+    new:      { label: '⏳ قيد التجميع', cls: 'status-new' },
+    shipped:  { label: '🚚 تم الشحن',   cls: 'status-prepared' },
+    delivered:{ label: '✅ تم التسليم',  cls: 'status-delivered' },
+  };
+  document.getElementById('batchDetailStatus').innerHTML =
+    Object.entries(statusMap).map(([k,v]) =>
+      `<button onclick="changeBatchStatus(${b.id},'${k}');openBatchDetail(${b.id})"
+        style="border:1.5px solid ${b.status===k?'var(--blue2)':'#ddd'};background:${b.status===k?'var(--blue2)':'#fff'};color:${b.status===k?'#fff':'#555'};border-radius:8px;padding:5px 14px;font-family:Cairo,sans-serif;font-size:0.82rem;font-weight:700;cursor:pointer;">${v.label}</button>`
+    ).join('');
+
+  const pieces = countBatchPieces(b);
+  const sales = getBatchSales(b);
+  const created = b.createdAt ? new Date(b.createdAt).toLocaleDateString('ar-EG') + ' ' + new Date(b.createdAt).toLocaleTimeString('ar-EG', {hour:'2-digit',minute:'2-digit'}) : '—';
+  document.getElementById('batchDetailStats').innerHTML = `
+    <div style="background:#eff6ff;border-radius:8px;padding:8px 14px;text-align:center;"><span style="font-size:1.1rem;font-weight:900;color:#2563eb;">${b.orders.length}</span><br><span style="font-size:0.75rem;color:#1e40af;font-weight:700;">أوردرات</span></div>
+    <div style="background:#fef3c7;border-radius:8px;padding:8px 14px;text-align:center;"><span style="font-size:1.1rem;font-weight:900;color:#b45309;">${pieces}</span><br><span style="font-size:0.75rem;color:#92400e;font-weight:700;">قطع</span></div>
+    <div style="background:#dcfce7;border-radius:8px;padding:8px 14px;text-align:center;"><span style="font-size:0.85rem;font-weight:700;color:#166534;">${sales || '—'}</span><br><span style="font-size:0.75rem;color:#15803d;font-weight:700;">السيلز</span></div>
+    <div style="background:#f1f5f9;border-radius:8px;padding:8px 14px;text-align:center;"><span style="font-size:0.82rem;font-weight:700;color:#475569;">${created}</span><br><span style="font-size:0.75rem;color:#64748b;font-weight:700;">تاريخ الإنشاء</span></div>`;
+
+  const orderRows = (b.orders || []).map(oid => {
+    const o = DB.orders.find(x => x.id === oid);
+    if (!o) return `<tr><td colspan="5" style="color:#999;">أوردر #${oid} غير موجود</td></tr>`;
+    const items = o.items || [{ model: o.model, color: o.color, size: o.size }];
+    const pcs = items.length;
+    const status = o.status || 'new';
+    const stLabel = status==='prepared'?'✅ تم التجهيز':status==='delivered'?'🚚 تم التسليم':'⏳ جديد';
+    return `<tr>
+      <td><span class="badge badge-blue">#${o.id}</span></td>
+      <td style="font-weight:700;">${o.clientName||'—'}</td>
+      <td style="font-size:0.82rem;">${items.map(it=>`${it.model||''} ${it.color||''} (${it.size||''})`).join('<br>')}</td>
+      <td style="text-align:center;font-weight:800;color:var(--blue2);">${pcs}</td>
+      <td style="text-align:center;">${stLabel}</td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('batchDetailOrders').innerHTML = `
+    <table style="width:100%;border-collapse:collapse;">
+      <thead><tr style="background:#f8fafc;border-bottom:2px solid #e2e8f0;">
+        <th style="padding:8px 12px;text-align:right;font-size:0.82rem;">رقم الأوردر</th>
+        <th style="padding:8px 12px;text-align:right;font-size:0.82rem;">العميل</th>
+        <th style="padding:8px 12px;text-align:right;font-size:0.82rem;">المنتجات</th>
+        <th style="padding:8px 12px;text-align:center;font-size:0.82rem;">القطع</th>
+        <th style="padding:8px 12px;text-align:center;font-size:0.82rem;">حالة الأوردر</th>
+      </tr></thead>
+      <tbody>${orderRows}</tbody>
+    </table>`;
+
+  document.getElementById('batchDetailModal').style.display = 'flex';
+}
+
+function deleteBatch(id) {
+  if (!requirePerm('manageBatches')) return;
+  const b = (DB.batches || []).find(x => x.id === id);
+  if (!b) return;
+  if (!confirm(`هل تريد حذف "${b.name}"؟ لن يتم حذف الأوردرات.`)) return;
+  DB.batches = DB.batches.filter(x => x.id !== id);
+  save();
+  renderBatchesTable();
+  toast('🗑 تم حذف التجميعة', 'success');
+}
 
 // ── Image Viewer ──────────────────────────────────────────────────────────────
 function openImgViewer(src) {
@@ -5633,6 +5956,7 @@ function renderBackupPanel() {
     { label:'👥 العملاء',   value: DB.clients.length, color:'var(--emerald)' },
     { label:'⚠️ الديفوهات', value: (DB.defects||[]).length, color:'var(--gold)' },
     { label:'🚚 الشحنات',   value: (DB.shipments||[]).length, color:'var(--blue2)' },
+    { label:'📦 التجميعات',  value: (DB.batches||[]).length, color:'#2563eb' },
     { label:'🗑 المحذوفات', value: (DB.trash||[]).length, color:'var(--red)' },
     { label:'👤 المستخدمين',value: DB.users.length,   color:'var(--purple)' },
   ];
