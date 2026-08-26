@@ -5125,6 +5125,7 @@ function openBatchDetail(id) {
       <td style="font-weight:700;">${o.clientName||'—'}</td>
       <td style="font-size:0.82rem;">${items.map(it=>`${it.model||''} ${it.color||''} (${it.size||''})`).join('<br>')}</td>
       <td style="text-align:center;font-weight:800;color:var(--blue2);">${pcs}</td>
+      <td style="font-size:0.82rem;">${o.sales||'—'}</td>
       <td style="text-align:center;">${stLabel}</td>
     </tr>`;
   }).join('');
@@ -5136,6 +5137,7 @@ function openBatchDetail(id) {
         <th style="padding:8px 12px;text-align:right;font-size:0.82rem;">العميل</th>
         <th style="padding:8px 12px;text-align:right;font-size:0.82rem;">المنتجات</th>
         <th style="padding:8px 12px;text-align:center;font-size:0.82rem;">القطع</th>
+        <th style="padding:8px 12px;text-align:right;font-size:0.82rem;">السيلز</th>
         <th style="padding:8px 12px;text-align:center;font-size:0.82rem;">حالة الأوردر</th>
       </tr></thead>
       <tbody>${orderRows}</tbody>
