@@ -1795,8 +1795,26 @@ td {
     <div id="batchDetailStatus" style="display:flex;gap:6px;"></div>
   </div>
   <div id="batchDetailStats" style="display:flex;gap:12px;margin-bottom:14px;flex-wrap:wrap;"></div>
+  <div id="batchAddOrders" style="display:none;background:#f6faff;border:1.5px solid #dbe4f5;border-radius:10px;padding:14px;margin-bottom:14px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+      <div style="font-weight:800;color:var(--navy);font-size:0.92rem;">➕ إضافة أوردرات للتجميعة</div>
+      <button onclick="closeBatchAddOrders()"
+        style="background:#fee2e2;color:#dc2626;border:none;border-radius:7px;padding:5px 12px;cursor:pointer;font-family:Cairo,sans-serif;font-size:0.8rem;font-weight:700;">✕ إلغاء</button>
+    </div>
+    <input type="text" id="batchAddOrderSearch" placeholder="🔍 بحث برقم الأوردر أو اسم العميل..."
+      style="width:100%;padding:8px 13px;border:1.5px solid var(--border);border-radius:8px;margin-bottom:10px;font-family:Cairo,sans-serif;font-size:0.9rem;direction:rtl;outline:none;"
+      oninput="renderBatchAddOrderList()">
+    <div id="batchAddOrderList" style="max-height:220px;overflow-y:auto;border:1.5px solid var(--border);border-radius:8px;background:#fff;"></div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-top:10px;">
+      <span style="font-size:0.85rem;color:#666;"><span id="batchAddCount">0</span> أوردر محدد</span>
+      <button onclick="confirmAddOrdersToBatch()"
+        style="background:#16a34a;color:#fff;border:none;border-radius:8px;padding:8px 18px;font-family:Cairo,sans-serif;font-size:0.85rem;font-weight:700;cursor:pointer;">✅ إضافة للتجميعة</button>
+    </div>
+  </div>
   <div id="batchDetailOrders"></div>
   <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:14px;">
+    <button onclick="openBatchAddOrders()"
+      style="background:var(--blue2);color:#fff;border:none;border-radius:8px;padding:8px 20px;font-family:Cairo,sans-serif;font-weight:700;cursor:pointer;">➕ إضافة أوردرات</button>
     <button onclick="closeModal('batchDetailModal')"
       style="background:#f1f5f9;color:#475569;border:1.5px solid #ddd;border-radius:8px;padding:8px 20px;font-family:Cairo,sans-serif;font-weight:700;cursor:pointer;">❌ إغلاق</button>
   </div>
@@ -5091,6 +5109,9 @@ function changeBatchStatus(id, val) {
 function openBatchDetail(id) {
   const b = (DB.batches || []).find(x => x.id === id);
   if (!b) return;
+  currentBatchDetailId = id;
+  const addSection = document.getElementById('batchAddOrders');
+  if (addSection) addSection.style.display = 'none';
   document.getElementById('batchDetailTitle').textContent = `📦 ${b.name} (#${b.id})`;
 
   const statusMap = {
@@ -5144,6 +5165,82 @@ function openBatchDetail(id) {
     </table>`;
 
   document.getElementById('batchDetailModal').classList.add('open');
+}
+
+// ── Add orders to existing batch ──────────────────────────────────────────────
+let selectedBatchAddOrders = [];
+let addingBatchId = null;
+let currentBatchDetailId = null;
+
+function openBatchAddOrders() {
+  if (!requirePerm('manageBatches')) return;
+  addingBatchId = currentBatchDetailId;
+  if (!addingBatchId) return;
+  selectedBatchAddOrders = [];
+  const search = document.getElementById('batchAddOrderSearch');
+  search.value = '';
+  document.getElementById('batchAddCount').textContent = '0';
+  document.getElementById('batchAddOrders').style.display = '';
+  renderBatchAddOrderList();
+}
+
+function closeBatchAddOrders() {
+  document.getElementById('batchAddOrders').style.display = 'none';
+}
+
+function renderBatchAddOrderList() {
+  const list = document.getElementById('batchAddOrderList');
+  const q = (document.getElementById('batchAddOrderSearch')?.value || '').toLowerCase();
+  const batchedOrderIds = (DB.batches || []).flatMap(b => b.orders || []);
+  let available = DB.orders.filter(o => !batchedOrderIds.includes(o.id));
+  if (q) available = available.filter(o =>
+    String(o.id).includes(q) || (o.clientName||'').toLowerCase().includes(q)
+  );
+  if (!available.length) {
+    list.innerHTML = '<div style="padding:14px;text-align:center;color:#999;font-size:0.88rem;">لا توجد أوردرات متاحة (كلها مجمعة)</div>';
+    return;
+  }
+  list.innerHTML = available.map(o => {
+    const items = o.items || [{ model: o.model, color: o.color, size: o.size }];
+    const pcs = items.length;
+    const sel = selectedBatchAddOrders.includes(o.id);
+    return `<div onclick="toggleBatchAddOrderSelection(${o.id})"
+      style="display:flex;align-items:center;gap:10px;padding:9px 14px;border-bottom:1px solid #f0f0f0;cursor:pointer;${sel?'background:#dcfce7;':''}"
+      onmouseover="if(!selectedBatchAddOrders.includes(${o.id}))this.style.background='#f0f6ff'"
+      onmouseout="if(!selectedBatchAddOrders.includes(${o.id}))this.style.background=''">
+      <input type="checkbox" ${sel?'checked':''} style="accent-color:var(--blue2);width:16px;height:16px;">
+      <span class="badge badge-blue" style="font-weight:800;">#${o.id}</span>
+      <span style="font-weight:700;">${o.clientName||'—'}</span>
+      <span style="color:#888;font-size:0.8rem;">${items.map(it=>`${it.model||''} ${it.color||''} ${it.size||''}`).join(' | ')}</span>
+      <span style="margin-right:auto;font-size:0.8rem;color:var(--blue2);font-weight:700;">${pcs} قطعة</span>
+    </div>`;
+  }).join('');
+}
+
+function toggleBatchAddOrderSelection(id) {
+  const idx = selectedBatchAddOrders.indexOf(id);
+  if (idx >= 0) selectedBatchAddOrders.splice(idx, 1);
+  else selectedBatchAddOrders.push(id);
+  document.getElementById('batchAddCount').textContent = selectedBatchAddOrders.length;
+  renderBatchAddOrderList();
+}
+
+function confirmAddOrdersToBatch() {
+  if (!requirePerm('manageBatches')) return;
+  if (!addingBatchId) return;
+  if (!selectedBatchAddOrders.length) { toast('⚠️ اختر أوردر واحد على الأقل', 'warn'); return; }
+  const b = (DB.batches || []).find(x => x.id === addingBatchId);
+  if (!b) return;
+  if (!b.orders) b.orders = [];
+  const existing = new Set(b.orders);
+  const added = selectedBatchAddOrders.filter(id => !existing.has(id));
+  if (!added.length) { toast('⚠️ الأوردرات المحددة موجودة بالفعل', 'warn'); return; }
+  b.orders = [...b.orders, ...added];
+  save();
+  document.getElementById('batchAddOrders').style.display = 'none';
+  renderBatchesTable();
+  openBatchDetail(addingBatchId);
+  toast(`✅ تمت إضافة ${added.length} أوردر للتجميعة`, 'success');
 }
 
 function deleteBatch(id) {
