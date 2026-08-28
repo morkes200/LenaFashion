@@ -1815,6 +1815,8 @@ td {
   <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:14px;">
     <button onclick="openBatchAddOrders()"
       style="background:var(--blue2);color:#fff;border:none;border-radius:8px;padding:8px 20px;font-family:Cairo,sans-serif;font-weight:700;cursor:pointer;">➕ إضافة أوردرات</button>
+    <button onclick="exportBatchDetailPDF()"
+      style="background:#e74c3c;color:#fff;border:none;border-radius:8px;padding:8px 20px;font-family:Cairo,sans-serif;font-weight:700;cursor:pointer;">📄 طباعة PDF</button>
     <button onclick="closeModal('batchDetailModal')"
       style="background:#f1f5f9;color:#475569;border:1.5px solid #ddd;border-radius:8px;padding:8px 20px;font-family:Cairo,sans-serif;font-weight:700;cursor:pointer;">❌ إغلاق</button>
   </div>
@@ -5241,6 +5243,116 @@ function confirmAddOrdersToBatch() {
   renderBatchesTable();
   openBatchDetail(addingBatchId);
   toast(`✅ تمت إضافة ${added.length} أوردر للتجميعة`, 'success');
+}
+
+// ── Export Batch Detail PDF ───────────────────────────────────────────────────
+function exportBatchDetailPDF() {
+  const b = (DB.batches || []).find(x => x.id === currentBatchDetailId);
+  if (!b) { toast('⚠️ التجميعة غير موجودة', 'warn'); return; }
+
+  const statusLabels = { new:'قيد التجميع', shipped:'تم الشحن', delivered:'تم التسليم' };
+  const st = statusLabels[b.status] || b.status;
+  const created = b.createdAt ? new Date(b.createdAt).toLocaleString('ar-EG') : '—';
+  const pieces = countBatchPieces(b);
+  const sales = getBatchSales(b);
+  const today = formatDateDisplay(formatDateInput(new Date()));
+
+  let rowsHTML = '';
+  (b.orders || []).forEach((oid, i) => {
+    const o = DB.orders.find(x => x.id === oid);
+    if (!o) return;
+    const items = o.items || [{ model: o.model, color: o.color, size: o.size }];
+    const pcs = items.length;
+    const ost = o.status || 'new';
+    const ostLabel = ost==='prepared'?'✅ تم التجهيز':ost==='delivered'?'🚚 تم التسليم':'⏳ جديد';
+    const bg = i % 2 === 0 ? '#ffffff' : '#f0f6ff';
+    rowsHTML += `<tr style="background:${bg};">
+      <td style="padding:7px 9px;border:1px solid #d0d8ee;font-size:12px;text-align:center;">${i+1}</td>
+      <td style="padding:7px 9px;border:1px solid #d0d8ee;font-size:12px;text-align:center;">#${o.id}</td>
+      <td style="padding:7px 9px;border:1px solid #d0d8ee;font-size:12px;text-align:right;">${o.clientName||'—'}</td>
+      <td style="padding:7px 9px;border:1px solid #d0d8ee;font-size:11px;text-align:right;">${items.map(it=>`${it.model||''} ${it.color||''} (${it.size||''})`).join('<br>')}</td>
+      <td style="padding:7px 9px;border:1px solid #d0d8ee;font-size:12px;text-align:center;">${pcs}</td>
+      <td style="padding:7px 9px;border:1px solid #d0d8ee;font-size:12px;text-align:center;">${o.sales||'—'}</td>
+      <td style="padding:7px 9px;border:1px solid #d0d8ee;font-size:12px;text-align:center;">${ostLabel}</td>
+    </tr>`;
+  });
+
+  const html = `<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;900&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Cairo', Arial, sans-serif; background: #fff; color: #1a2340; direction: rtl; padding: 28px; font-weight: 700; }
+  .header { background: linear-gradient(135deg,#0f1e3c,#1a3a6e); color: #fff; border-radius: 12px; padding: 20px 28px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
+  .header h1 { font-size: 26px; font-weight: 900; }
+  .header .logo-sub { font-size: 14px; color: #aac4e8; margin-top: 4px; font-weight: 700; }
+  .header .date-badge { background: rgba(255,255,255,0.12); border-radius: 8px; padding: 8px 14px; font-size: 14px; text-align: center; font-weight: 700; }
+  .meta { background: #f0f4ff; border-radius: 8px; padding: 12px 18px; margin-bottom: 18px; font-size: 14px; color: #445; display: flex; gap: 20px; flex-wrap: wrap; align-items: center; font-weight: 700; }
+  .meta span { font-weight: 900; color: #1a3a6e; }
+  .stats { display: flex; gap: 14px; margin-bottom: 20px; }
+  .stat { flex: 1; background: #f8faff; border: 2px solid #dde3f0; border-radius: 10px; padding: 12px; text-align: center; }
+  .stat .n { font-size: 26px; font-weight: 900; color: #0f1e3c; }
+  .stat .l { font-size: 12px; color: #7a8aaa; margin-top: 2px; font-weight: 700; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  thead th { background: #0f1e3c; color: #fff; padding: 11px 8px; text-align: center; font-size: 13px; font-weight: 900; }
+  tbody td { padding: 10px 8px; border: 1.5px solid #c8d0e8; font-size: 13px; font-weight: 700; }
+  tfoot td { background: #0f1e3c; color: #fff; font-weight: 900; text-align: center; padding: 10px; font-size: 14px; border: 1.5px solid #0f1e3c; }
+  .footer { margin-top: 20px; text-align: center; font-size: 12px; color: #888; border-top: 2px solid #eee; padding-top: 12px; font-weight: 700; }
+  @media print {
+    body { padding: 10px; }
+    @page { margin: 12mm; size: A4 landscape; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <div class="logo-sub">👗 LENA FASHION — نظام الأوردرات</div>
+    <h1>تفاصيل التجميعة: ${b.name} (#${b.id})</h1>
+  </div>
+  <div class="date-badge">
+    <div style="font-size:11px;color:#aac4e8;">تاريخ الطباعة</div>
+    <div style="font-size:16px;font-weight:900;">${today}</div>
+  </div>
+</div>
+
+<div class="meta">
+  <div>📅 تاريخ الإنشاء: <span>${created}</span></div>
+  <div>📌 الحالة: <span>${st}</span></div>
+  <div>👤 أُنشئت بواسطة: <span>${b.createdBy||'—'}</span></div>
+</div>
+
+<div class="stats">
+  <div class="stat"><div class="n">${(b.orders||[]).length}</div><div class="l">📦 عدد الأوردرات</div></div>
+  <div class="stat" style="background:#fef3c7;border-color:#fcd34d;"><div class="n" style="color:#92400e;">${pieces}</div><div class="l" style="color:#92400e;">🧵 إجمالي القطع</div></div>
+  <div class="stat" style="background:#dcfce7;border-color:#86efac;"><div class="n" style="color:#166534;font-size:20px;">${sales||'—'}</div><div class="l" style="color:#166534;">👤 السيلز</div></div>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>#</th><th>رقم الأوردر</th><th>العميل</th><th>المنتجات</th>
+      <th>القطع</th><th>السيلز</th><th>الحالة</th>
+    </tr>
+  </thead>
+  <tbody>${rowsHTML}</tbody>
+  <tfoot><tr><td colspan="7">إجمالي الأوردرات: ${(b.orders||[]).length} | إجمالي القطع: ${pieces} قطعة</td></tr></tfoot>
+</table>
+
+<div class="footer">👗 LENA FASHION — تم إنشاء هذا التقرير بتاريخ ${today}</div>
+
+<div style="margin-top:24px;text-align:center;">
+  <button onclick="window.print()" style="background:#0f1e3c;color:#fff;border:none;padding:12px 32px;border-radius:8px;font-family:Cairo,sans-serif;font-size:15px;font-weight:900;cursor:pointer;">🖨️ طباعة / حفظ PDF</button>
+  <button onclick="window.close()" style="background:#e74c3c;color:#fff;border:none;padding:12px 24px;border-radius:8px;font-family:Cairo,sans-serif;font-size:15px;font-weight:900;cursor:pointer;margin-right:10px;">✕ إغلاق</button>
+</div>
+</body></html>`;
+
+  const win = window.open('','_blank');
+  win.document.write(html);
+  win.document.close();
 }
 
 function deleteBatch(id) {
