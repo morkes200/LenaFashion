@@ -5151,6 +5151,7 @@ function openBatchDetail(id) {
       <td style="text-align:center;font-weight:800;color:var(--blue2);">${pcs}</td>
       <td style="font-size:0.82rem;">${o.sales||'—'}</td>
       <td style="text-align:center;">${stLabel}</td>
+      <td style="text-align:center;"><button onclick="removeOrderFromBatch(${b.id},${o.id})" title="إزالة من التجميعة" style="background:#fee2e2;color:#dc2626;border:none;border-radius:7px;padding:4px 10px;cursor:pointer;font-family:Cairo,sans-serif;font-size:0.78rem;font-weight:700;">✕ إزالة</button></td>
     </tr>`;
   }).join('');
 
@@ -5164,6 +5165,7 @@ function openBatchDetail(id) {
         <th style="padding:8px 12px;text-align:center;font-size:0.82rem;">القطع</th>
         <th style="padding:8px 12px;text-align:right;font-size:0.82rem;">السيلز</th>
         <th style="padding:8px 12px;text-align:center;font-size:0.82rem;">حالة الأوردر</th>
+        <th style="padding:8px 12px;text-align:center;font-size:0.82rem;width:50px;"></th>
       </tr></thead>
       <tbody>${orderRows}</tbody>
     </table>`;
@@ -5245,6 +5247,18 @@ function confirmAddOrdersToBatch() {
   renderBatchesTable();
   openBatchDetail(addingBatchId);
   toast(`✅ تمت إضافة ${added.length} أوردر للتجميعة`, 'success');
+}
+
+function removeOrderFromBatch(batchId, orderId) {
+  if (!requirePerm('manageBatches')) return;
+  const b = (DB.batches || []).find(x => x.id === batchId);
+  if (!b) return;
+  if (!confirm(`هل تريد إزالة الأوردر #${orderId} من التجميعة "${b.name}"؟`)) return;
+  b.orders = b.orders.filter(id => id !== orderId);
+  save();
+  renderBatchesTable();
+  openBatchDetail(batchId);
+  toast(`✅ تم إزالة الأوردر #${orderId} من التجميعة`, 'success');
 }
 
 // ── Export Batch Detail PDF ───────────────────────────────────────────────────
