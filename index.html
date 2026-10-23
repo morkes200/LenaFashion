@@ -1741,8 +1741,8 @@ td {
 
   <!-- Batches table -->
   <div class="table-wrap">
-    <table>
-      <thead>
+<table>
+  <thead>
         <tr>
           <th>#</th>
           <th>اسم التجميعة</th>
@@ -3861,7 +3861,7 @@ function exportBatchPDF() {
     const bg = i % 2 === 0 ? '#ffffff' : '#f0f6ff';
     rowsHTML += `<tr style="background:${bg};">`;
     cells.forEach(td => {
-      rowsHTML += `<td style="padding:5px 5px;border:1px solid #d0d8ee;font-size:10px;text-align:center;word-break:break-word;">${td.innerText || td.textContent}</td>`;
+      rowsHTML += `<td style="padding:5px 5px;border:1px solid #d0d8ee;font-size:12px;text-align:center;word-break:break-word;">${td.innerText || td.textContent}</td>`;
     });
     rowsHTML += '</tr>';
   });
@@ -4242,7 +4242,7 @@ function exportPDF() {
     cells.forEach((td, ci) => {
       const align = ci >= 4 ? 'right' : 'center';
       // strip badge spans – just get text
-      rowsHTML += `<td style="padding:4px 4px;border:1px solid #d0d8ee;font-size:9px;text-align:${align};word-break:break-word;">${td.innerText || td.textContent}</td>`;
+      rowsHTML += `<td style="padding:6px 4px;border:1px solid #d0d8ee;font-size:11px;text-align:${align};word-break:break-word;">${td.innerText || td.textContent}</td>`;
     });
     rowsHTML += '</tr>';
   });
@@ -4282,9 +4282,9 @@ function exportPDF() {
     body { padding: 10px; font-weight: 700; }
     .no-print { display: none !important; }
     @page { margin: 8mm; size: A4 portrait; }
-    table { font-size: 9px; table-layout: fixed; }
-    thead th { font-size: 9px; padding: 5px 3px; }
-    tbody td { font-size: 9px; padding: 4px 3px; font-weight: 700; word-break: break-word; }
+    table { font-size: 11px; table-layout: fixed; }
+    thead th { font-size: 11px; padding: 7px 4px; }
+    tbody td { font-size: 11px; padding: 6px 4px; font-weight: 700; word-break: break-word; }
     .stats { gap: 8px; }
     .stat { padding: 8px 4px; }
     .stat .n { font-size: 20px; }
@@ -4317,6 +4317,11 @@ ${filterDesc ? `<div class="meta"><span>📋 فلاتر التقرير:</span> $
 </div>
 
 <table>
+  <colgroup>
+    <col style="width:3%"><col style="width:6%"><col style="width:8%"><col style="width:6%">
+    <col style="width:14%"><col style="width:11%"><col style="width:23%"><col style="width:4%">
+    <col style="width:8%"><col style="width:7%"><col style="width:10%">
+  </colgroup>
   <thead>
     <tr>
       <th>#</th><th>رقم الأوردر</th><th>التاريخ</th><th>اليوم</th>
@@ -5287,14 +5292,14 @@ function exportBatchDetailPDF() {
     const ostLabel = ost==='prepared'?'✅ تم التجهيز':ost==='delivered'?'🚚 تم التسليم':'⏳ جديد';
     const bg = i % 2 === 0 ? '#ffffff' : '#f0f6ff';
     rowsHTML += `<tr style="background:${bg};">
-      <td style="padding:5px 5px;border:1px solid #d0d8ee;font-size:10px;text-align:center;word-break:break-word;">${i+1}</td>
-      <td style="padding:5px 5px;border:1px solid #d0d8ee;font-size:10px;text-align:center;word-break:break-word;">#${o.id}</td>
-      <td style="padding:5px 5px;border:1px solid #d0d8ee;font-size:10px;text-align:right;word-break:break-word;">${o.clientName||'—'}</td>
-      <td style="padding:5px 5px;border:1px solid #d0d8ee;font-size:10px;direction:ltr;text-align:right;word-break:break-word;">${o.phone||'—'}</td>
-      <td style="padding:5px 5px;border:1px solid #d0d8ee;font-size:10px;text-align:right;word-break:break-word;">${items.map(it=>`${it.model||''} ${it.color||''} (${it.size||''})`).join('<br>')}</td>
-      <td style="padding:5px 5px;border:1px solid #d0d8ee;font-size:10px;text-align:center;word-break:break-word;">${pcs}</td>
-      <td style="padding:5px 5px;border:1px solid #d0d8ee;font-size:10px;text-align:center;word-break:break-word;">${o.sales||'—'}</td>
-      <td style="padding:5px 5px;border:1px solid #d0d8ee;font-size:10px;text-align:center;word-break:break-word;">${ostLabel}</td>
+      <td style="padding:5px 5px;border:1px solid #d0d8ee;font-size:12px;text-align:center;word-break:break-word;">${i+1}</td>
+      <td style="padding:5px 5px;border:1px solid #d0d8ee;font-size:12px;text-align:center;word-break:break-word;">#${o.id}</td>
+      <td style="padding:5px 5px;border:1px solid #d0d8ee;font-size:12px;text-align:right;word-break:break-word;">${o.clientName||'—'}</td>
+      <td style="padding:5px 5px;border:1px solid #d0d8ee;font-size:12px;direction:ltr;text-align:right;word-break:break-word;">${o.phone||'—'}</td>
+      <td style="padding:5px 5px;border:1px solid #d0d8ee;font-size:12px;text-align:right;word-break:break-word;">${items.map(it=>`${it.model||''} ${it.color||''} (${it.size||''})`).join('<br>')}</td>
+      <td style="padding:5px 5px;border:1px solid #d0d8ee;font-size:12px;text-align:center;word-break:break-word;">${pcs}</td>
+      <td style="padding:5px 5px;border:1px solid #d0d8ee;font-size:12px;text-align:center;word-break:break-word;">${o.sales||'—'}</td>
+      <td style="padding:5px 5px;border:1px solid #d0d8ee;font-size:12px;text-align:center;word-break:break-word;">${ostLabel}</td>
     </tr>`;
   });
 
